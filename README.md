@@ -17,6 +17,11 @@ The goal is to use as much of the SC default keybindings to minimize the control
 
  * Apply a few [manual settings](sc-settings/ManualSettings.md) in-game.
 
+## TrackIR
+Looking around in your cockpit is great with TrackIR! But it's absolutely impossible to aim down a gun's sight in FPS mode. Sometimes it's also easier to handle kiosk menus without a moving head.
+To switch between look-around mode and FPS aim-down-sight mode one switch on the HOTAS is dedicated to flip between thos two modes.
+In order to work with your TrackIR configuration you should bind the **PAUSE** function to => `[DEL]` and the **Re-Center** function to => `[HOME]`.
+
 ## Action Mapping / Layout
 
 Here's an overview of the currently mapped functions to the HOTAS buttons and axis.
