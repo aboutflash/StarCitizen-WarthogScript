@@ -16,6 +16,11 @@ The goal is to use as much of the SC default keybindings to minimize the control
     * Joystick (2) -> Joystick (2) // optional Rudder Pedals - if you have some
 
  * Apply a few [manual settings](sc-settings/ManualSettings.md) in-game.
+
+## Action Mapping / Layout
+
+Here's an overview of the currently mapped functions to the HOTAS buttons and axis.
+![Functional Button/Axis Mapping](resources/warthog_layout.png "Warthog HOTAS function mapping")
  
 ## Trouble shooting
 In this manual I assume, that the Warthog HOTAS is the only controller you have attached to your PC (besides Rudder Pedals, if you have).
