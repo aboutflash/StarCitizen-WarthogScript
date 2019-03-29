@@ -1,13 +1,14 @@
 include "tm/target.tmh"
 
-int log_level = 1;
+	int log_level = 1;
 alias version = "3.5.0i";
 int delay_ms = 100;
 
 int main()
 {
 	printf("\x0aStartCitizen %s combined Throttle & Joystick\x0a", &version);
-	if(log_level > 0) printf("... log_level set to %d (change it to 0 to stop logging)\x0a\x0a", log_level);
+	if (log_level > 0)
+		printf("... log_level set to %d (change it to 0 to stop logging)\x0a\x0a", log_level);
 
 	Configure(&HCougar, MODE_EXCLUDED);
 	Configure(&JoystickF18, MODE_EXCLUDED);
@@ -18,117 +19,115 @@ int main()
 	Configure(&TFRPRudder, MODE_EXCLUDED);
 	Configure(&TWCSThrottle, MODE_EXCLUDED);
 	Configure(&TFRPHARudder, MODE_EXCLUDED);
-	
-	if(Init(&EventHandle)) return 1;
-	
+
+	if (Init(&EventHandle))
+		return 1;
+
 	SetKBRate(30, 33);
 	SetKBLayout(KB_ENG);
 	SetShiftButton(&Joystick, S4, &Throttle, FLAPU, FLAPD, 0);
 
 	mapping();
-	
+
 	startup_illumination();
-
 }
-
 
 int EventHandle(int type, alias o, int x)
 {
 	DefaultMapping(&o, x);
 }
 
-
 int startup_illumination()
 {
 
-	if(log_level > 0) printf("... illuminate throttle\x0a");
+	if (log_level > 0)
+		printf("... illuminate throttle\x0a");
 
-	ActKey(KEYON+LED(&Throttle, LED_ONOFF, LED_CURRENT-LED0));
-	ActKey(KEYON+LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0));
-	
+	ActKey(KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT - LED0));
+	ActKey(KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0));
+
 	int count = 0;
-	ActKey(KEYON+CHAIN(
-		D(),
-		LED(&Throttle, LED_ONOFF, LED_CURRENT+LED5),
-		D(delay_ms * count),
-		LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5),
-		D(),
-		LED(&Throttle, LED_ONOFF, LED_CURRENT+LED4),
-		D(delay_ms * (count+1)),
-		LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4),
-		D(),
-		LED(&Throttle, LED_ONOFF, LED_CURRENT+LED3),
-		D(delay_ms * (count+1)),
-		LED(&Throttle, LED_ONOFF, LED_CURRENT-LED3),
-		D(),
-		LED(&Throttle, LED_ONOFF, LED_CURRENT+LED2),
-		D(delay_ms * (count+1)),
-		LED(&Throttle, LED_ONOFF, LED_CURRENT-LED2),
-		D(),
-		LED(&Throttle, LED_ONOFF, LED_CURRENT+LED1),
-		D(delay_ms * (count+1)),
-		LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1),
-		LED(&Throttle, LED_INTENSITY, 43)
-	));
+	ActKey(KEYON + CHAIN(
+					   D(),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5),
+					   D(delay_ms * count),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5),
+					   D(),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4),
+					   D(delay_ms * (count + 1)),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4),
+					   D(),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED3),
+					   D(delay_ms * (count + 1)),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3),
+					   D(),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED2),
+					   D(delay_ms * (count + 1)),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2),
+					   D(),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1),
+					   D(delay_ms * (count + 1)),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1),
+					   LED(&Throttle, LED_INTENSITY, 43)));
 
 	// ActKey(KEYON+LED(&Throttle, LED_INTENSITY, 43));
-	
 }
 
+int mapping()
+{
 
-int mapping() {
+	if (log_level > 0)
+		printf("... init mappings:\x0a");
 
-	if(log_level > 0) printf("... init mappings:\x0a");
-	
 	throttle_maps();
 	joystick_maps();
 }
 
-
 int throttle_maps()
 {
 
-	if(log_level > 0) printf("... add throttle mappings\x0a");
+	if (log_level > 0)
+		printf("... add throttle mappings\x0a");
 
 	// keys
-	MapKeyIOUMD(&Throttle, SC, PULSE+'v', PULSE+'v', PULSE+'v', PULSE+'v', PULSE+'v', PULSE+'v');
+	MapKeyIOUMD(&Throttle, SC, PULSE + 'v', PULSE + 'v', PULSE + 'v', PULSE + 'v', PULSE + 'v', PULSE + 'v');
 	MapKeyIOUMD(&Throttle, MSU, F10, F10, F10, F10, F10, F10);
 	MapKeyIOUMD(&Throttle, MSD, F9, F9, F9, F9, F9, F9);
 	MapKeyIOUMD(&Throttle, MSL, 'z', 'z', 'z', 'z', 'z', 'z');
-	MapKeyIOUMD(&Throttle, SPDF, CHAIN( L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED1)), CHAIN( L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED1)), CHAIN( L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED1)), CHAIN( L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED1)), CHAIN( L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED1)), CHAIN( L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED1)));
-	MapKeyRIOUMD(&Throttle, SPDF, LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1));
+	MapKeyIOUMD(&Throttle, SPDF, CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)), CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)), CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)), CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)), CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)), CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)));
+	MapKeyRIOUMD(&Throttle, SPDF, LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1));
 	MapKeyIOUMD(&Throttle, SPDB, 'x', 'x', 'x', 'x', 'x', 'x');
-	MapKeyIOUMD(&Throttle, BSB, CHAIN( 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED5)), CHAIN( 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED5)), CHAIN( 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED5)), CHAIN( 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED5)), CHAIN( 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED5)), CHAIN( 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED5)));
-	MapKeyRIOUMD(&Throttle, BSB, LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5));
-	MapKeyIOUMD(&Throttle, CHF, PULSE+'h', PULSE+'h', PULSE+'h', PULSE+'h', PULSE+'h', PULSE+'h');
-	MapKeyIOUMD(&Throttle, CHB, PULSE+'g', PULSE+'g', PULSE+'g', PULSE+'g', PULSE+'g', PULSE+'g');
-	MapKeyIOUMD(&Throttle, PSF, PULSE+'t', PULSE+'t', PULSE+'t', PULSE+'t', PULSE+'t', PULSE+'t');
-	MapKeyRIOUMD(&Throttle, PSF, PULSE+'t', PULSE+'t', PULSE+'t', PULSE+'t', PULSE+'t', PULSE+'t');
-	MapKeyIOUMD(&Throttle, EFLNORM, CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1)), CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1)), CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1)), CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1)), CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1)), CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED1)));
-	MapKeyRIOUMD(&Throttle, EFLNORM, CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 43)), CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 43)), CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 43)), CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 43)), CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 43)), CHAIN( PULSE+'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED0), D(), LED(&Throttle, LED_INTENSITY, 43)));
-	MapKeyIOUMD(&Throttle, EFRNORM, CHAIN( PULSE+HOME, D(100), PULSE+DEL), CHAIN( PULSE+HOME, D(100), PULSE+DEL), CHAIN( PULSE+HOME, D(100), PULSE+DEL), CHAIN( PULSE+HOME, D(100), PULSE+DEL), CHAIN( PULSE+HOME, D(100), PULSE+DEL), CHAIN( PULSE+HOME, D(100), PULSE+DEL));
-	MapKeyRIOUMD(&Throttle, EFRNORM, CHAIN( D(100), PULSE+DEL), CHAIN( D(100), PULSE+DEL), CHAIN( D(100), PULSE+DEL), CHAIN( D(100), PULSE+DEL), CHAIN( D(100), PULSE+DEL), CHAIN( D(100), PULSE+DEL));
-	MapKeyIOUMD(&Throttle, EOLMOTOR, PULSE+'p', PULSE+'p', PULSE+'p', PULSE+'p', PULSE+'p', PULSE+'p');
-	MapKeyIOUMD(&Throttle, EORMOTOR, PULSE+'o', PULSE+'o', PULSE+'o', PULSE+'o', PULSE+'o', PULSE+'o');
-	MapKeyIOUMD(&Throttle, APUON, PULSE+'i', PULSE+'i', PULSE+'i', PULSE+'i', PULSE+'i', PULSE+'i');
-	MapKeyRIOUMD(&Throttle, APUON, PULSE+'i', PULSE+'i', PULSE+'i', PULSE+'i', PULSE+'i', PULSE+'i');
+	MapKeyIOUMD(&Throttle, BSB, CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)));
+	MapKeyRIOUMD(&Throttle, BSB, LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5));
+	MapKeyIOUMD(&Throttle, CHF, PULSE + 'h', PULSE + 'h', PULSE + 'h', PULSE + 'h', PULSE + 'h', PULSE + 'h');
+	MapKeyIOUMD(&Throttle, CHB, PULSE + 'g', PULSE + 'g', PULSE + 'g', PULSE + 'g', PULSE + 'g', PULSE + 'g');
+	MapKeyIOUMD(&Throttle, PSF, PULSE + 't', PULSE + 't', PULSE + 't', PULSE + 't', PULSE + 't', PULSE + 't');
+	MapKeyRIOUMD(&Throttle, PSF, PULSE + 't', PULSE + 't', PULSE + 't', PULSE + 't', PULSE + 't', PULSE + 't');
+	MapKeyIOUMD(&Throttle, EFLNORM, CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1)), CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1)), CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1)), CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1)), CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1)), CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 86), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2), D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1)));
+	MapKeyRIOUMD(&Throttle, EFLNORM, CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 43)), CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 43)), CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 43)), CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 43)), CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 43)), CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0), D(), LED(&Throttle, LED_INTENSITY, 43)));
+	MapKeyIOUMD(&Throttle, EFRNORM, CHAIN(PULSE + HOME, D(100), PULSE + DEL), CHAIN(PULSE + HOME, D(100), PULSE + DEL), CHAIN(PULSE + HOME, D(100), PULSE + DEL), CHAIN(PULSE + HOME, D(100), PULSE + DEL), CHAIN(PULSE + HOME, D(100), PULSE + DEL), CHAIN(PULSE + HOME, D(100), PULSE + DEL));
+	MapKeyRIOUMD(&Throttle, EFRNORM, CHAIN(D(100), PULSE + DEL), CHAIN(D(100), PULSE + DEL), CHAIN(D(100), PULSE + DEL), CHAIN(D(100), PULSE + DEL), CHAIN(D(100), PULSE + DEL), CHAIN(D(100), PULSE + DEL));
+	MapKeyIOUMD(&Throttle, EOLMOTOR, PULSE + 'p', PULSE + 'p', PULSE + 'p', PULSE + 'p', PULSE + 'p', PULSE + 'p');
+	MapKeyIOUMD(&Throttle, EORMOTOR, PULSE + 'o', PULSE + 'o', PULSE + 'o', PULSE + 'o', PULSE + 'o', PULSE + 'o');
+	MapKeyIOUMD(&Throttle, APUON, PULSE + 'i', PULSE + 'i', PULSE + 'i', PULSE + 'i', PULSE + 'i', PULSE + 'i');
+	MapKeyRIOUMD(&Throttle, APUON, PULSE + 'i', PULSE + 'i', PULSE + 'i', PULSE + 'i', PULSE + 'i', PULSE + 'i');
 	MapKeyIOUMD(&Throttle, LDGH, 'n', 'n', 'n', 'n', 'n', 'n');
-	MapKeyIOUMD(&Throttle, FLAPD, 0, 0, 0, 0, PULSE+'m', PULSE+'m');
-	MapKeyRIOUMD(&Throttle, FLAPD, 0, 0, 0, 0, PULSE+'m', PULSE+'m');
-	MapKeyIOUMD(&Throttle, RDRNRM, PULSE+'/', PULSE+'/', PULSE+'/', PULSE+'/', PULSE+'/', PULSE+'/');
-	MapKeyRIOUMD(&Throttle, RDRNRM, PULSE+'/', PULSE+'/', PULSE+'/', PULSE+'/', PULSE+'/', PULSE+'/');
+	MapKeyIOUMD(&Throttle, FLAPD, 0, 0, 0, 0, PULSE + 'm', PULSE + 'm');
+	MapKeyRIOUMD(&Throttle, FLAPD, 0, 0, 0, 0, PULSE + 'm', PULSE + 'm');
+	MapKeyIOUMD(&Throttle, RDRNRM, PULSE + '/', PULSE + '/', PULSE + '/', PULSE + '/', PULSE + '/', PULSE + '/');
+	MapKeyRIOUMD(&Throttle, RDRNRM, PULSE + '/', PULSE + '/', PULSE + '/', PULSE + '/', PULSE + '/', PULSE + '/');
 	MapKeyIOUMD(&Throttle, APENG, 'b', 'b', 'b', 'b', 'b', 'b');
-	MapKeyIOUMD(&Throttle, APPAT, PULSE+'c', PULSE+'c', PULSE+'c', PULSE+'c', PULSE+'c', PULSE+'c');
-	MapKeyRIOUMD(&Throttle, APPAT, PULSE+'c', PULSE+'c', PULSE+'c', PULSE+'c', PULSE+'c', PULSE+'c');
-	MapKeyIOUMD(&Throttle, EOLIGN, PULSE+'p', PULSE+'p', PULSE+'p', PULSE+'p', PULSE+'p', PULSE+'p');
-	MapKeyIOUMD(&Throttle, EORIGN, PULSE+'o', PULSE+'o', PULSE+'o', PULSE+'o', PULSE+'o', PULSE+'o');
-	MapKeyIOUMD(&Throttle, IDLELON, CHAIN( 'x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED4)), CHAIN( 'x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED4)), CHAIN( 'x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED4)), CHAIN( 'x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED4)), CHAIN( 'x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED4)), CHAIN( 'x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT+LED4)));
-	MapKeyRIOUMD(&Throttle, IDLELON, LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4), LED(&Throttle, LED_ONOFF, LED_CURRENT-LED4));
-	MapKeyIOUMD(&Throttle, CSU, PULSE+F8, PULSE+F8, PULSE+F8, PULSE+F8, PULSE+F8, PULSE+F8);
+	MapKeyIOUMD(&Throttle, APPAT, PULSE + 'c', PULSE + 'c', PULSE + 'c', PULSE + 'c', PULSE + 'c', PULSE + 'c');
+	MapKeyRIOUMD(&Throttle, APPAT, PULSE + 'c', PULSE + 'c', PULSE + 'c', PULSE + 'c', PULSE + 'c', PULSE + 'c');
+	MapKeyIOUMD(&Throttle, EOLIGN, PULSE + 'p', PULSE + 'p', PULSE + 'p', PULSE + 'p', PULSE + 'p', PULSE + 'p');
+	MapKeyIOUMD(&Throttle, EORIGN, PULSE + 'o', PULSE + 'o', PULSE + 'o', PULSE + 'o', PULSE + 'o', PULSE + 'o');
+	MapKeyIOUMD(&Throttle, IDLELON, CHAIN('x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4)), CHAIN('x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4)), CHAIN('x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4)), CHAIN('x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4)), CHAIN('x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4)), CHAIN('x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4)));
+	MapKeyRIOUMD(&Throttle, IDLELON, LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4));
+	MapKeyIOUMD(&Throttle, CSU, PULSE + F8, PULSE + F8, PULSE + F8, PULSE + F8, PULSE + F8, PULSE + F8);
 	MapKeyIOUMD(&Throttle, CSD, F5, F5, F5, F5, F5, F5);
 	MapKeyIOUMD(&Throttle, CSR, F6, F6, F6, F6, F6, F6);
 	MapKeyIOUMD(&Throttle, CSL, F7, F7, F7, F7, F7, F7);
-	
+
 	// axis
 	MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 	SetSCurve(&Throttle, SCX, 0, 30, 0, 2, 0);
@@ -142,20 +141,21 @@ int throttle_maps()
 	SetJCurve(&Throttle, THR_FC, 50, 50);
 }
 
+int joystick_maps()
+{
 
-int joystick_maps() {
-	
-	if(log_level > 0) printf("... add joystick mappings\x0a");
-	
+	if (log_level > 0)
+		printf("... add joystick mappings\x0a");
+
 	// keys
 	MapKeyIOUMD(&Joystick, S3, L_ALT, L_ALT, L_ALT, L_ALT, L_ALT, L_ALT);
-	MapKeyIOUMD(&Joystick, TG2, CHAIN( DX1, D(), DX2), CHAIN( DX1, D(), DX2), CHAIN( DX1, D(), DX2), CHAIN( DX1, D(), DX2), CHAIN( DX1, D(), DX2), CHAIN( DX1, D(), DX2));
+	MapKeyIOUMD(&Joystick, TG2, CHAIN(DX1, D(), DX2), CHAIN(DX1, D(), DX2), CHAIN(DX1, D(), DX2), CHAIN(DX1, D(), DX2), CHAIN(DX1, D(), DX2), CHAIN(DX1, D(), DX2));
 	MapKeyIOUMD(&Joystick, H4U, '4', '4', '4', '4', '4', '4');
 	MapKeyIOUMD(&Joystick, H4R, '5', '5', '5', '5', '5', '5');
 	MapKeyIOUMD(&Joystick, H4D, '2', '2', '2', '2', '2', '2');
 	MapKeyIOUMD(&Joystick, H4L, '3', '3', '3', '3', '3', '3');
 	MapKeyIOUMD(&Joystick, H4P, '1', '1', '1', '1', '1', '1');
-	
+
 	// axis
 	MapAxis(&Joystick, JOYX, DX_X_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 	SetSCurve(&Joystick, JOYX, 0, 0, 0, 2, 0);
