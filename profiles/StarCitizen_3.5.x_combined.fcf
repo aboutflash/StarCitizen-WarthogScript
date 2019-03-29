@@ -2135,7 +2135,7 @@
         <ControlIndex>15</ControlIndex>
         <Events>
           <HidCommand0>
-            <EventName>Cycle Friendlies FW | +MOD BW</EventName>
+            <EventName>Cycle Pinned Targets FW | +MOD BW</EventName>
             <IsSequence>False</IsSequence>
             <Layers>1 2 16 32 64</Layers>
             <Delay>-1</Delay>
@@ -2178,7 +2178,7 @@
         <ControlIndex>16</ControlIndex>
         <Events>
           <HidCommand0>
-            <EventName>Cycle Pinned Targets FW | +MOD BW</EventName>
+            <EventName>Cycle Friendlies FW | +MOD BW</EventName>
             <IsSequence>False</IsSequence>
             <Layers>1 2 16 32 64</Layers>
             <Delay>-1</Delay>
@@ -2221,7 +2221,7 @@
         <ControlIndex>17</ControlIndex>
         <Events>
           <HidCommand0>
-            <EventName>Cycle Enemies FW | +MOD BW</EventName>
+            <EventName>Cycle Subtargets FW | HOLD Reset Subtarget | +MOD BW</EventName>
             <IsSequence>False</IsSequence>
             <Layers>1 2 16 32 64</Layers>
             <Delay>-1</Delay>
@@ -2264,7 +2264,7 @@
         <ControlIndex>18</ControlIndex>
         <Events>
           <HidCommand0>
-            <EventName>Cycle Subtargets FW | HOLD Reset Subtarget | +MOD BW</EventName>
+            <EventName>Cycle Enemies FW | +MOD BW</EventName>
             <IsSequence>False</IsSequence>
             <Layers>1 2 16 32 64</Layers>
             <Delay>-1</Delay>
