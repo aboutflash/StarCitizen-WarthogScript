@@ -1,37 +1,19 @@
-## Welcome to GitHub Pages
+# TM Warthog config script for StarCitizen v3.5.0
 
+A simple Warthog HOTAS setup to match the current SC control schema.
+The goal is to use as much of the SC default keybindings to minimize the controllers setup ordeal between releases.
+
+## How to run
+ * check out or download the files under ```./script```. All of it.
+ * point your T.A.R.G.E.T. software to run the script directly w/o loading the GUI
+```"C:\Program Files (x86)\Thrustmaster\TARGET\x64\TARGETGUI.exe" -r "E:\Games\Cloud Imperium Games\Script\StarCitizen-WarthogScript\script\StarCitizen_3.5.x_combined.tmc"```
+ * check out or download the keybindings file under ```sc-settings/mappings```
+ * in-game import the keybindings. (Keyboard -> Keyboard. Mouse -> Mouse. Joystick (1) -> Joystick (1))
+
+
+### Edit page
 You can use the [editor on GitHub](https://github.com/aboutflash/StarCitizen-WarthogScript/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/aboutflash/StarCitizen-WarthogScript/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
