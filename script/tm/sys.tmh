@@ -1,0 +1,95 @@
+define	SEEK_SET			0
+define	SEEK_CUR			1
+define	SEEK_END			2
+
+define	MAP_NORMAL		1
+define	MAP_IPTR			2
+define	MAP_IPTR_VPN	3
+define	MAP_THISCALL	4
+
+define	VAR_NONE			0
+define	VAR_CHAR			1
+define	VAR_BYTE			2
+define	VAR_SHORT			3
+define	VAR_WORD			4
+define	VAR_INT				5
+define	VAR_ALIAS			6
+define	VAR_FLOAT			7
+define	VAR_STRUCT		8
+
+// Mapped functions
+int	VARSIZE;
+int putchar(char c){}			// display a character at console
+int sizeof(alias var){}		// return the size of the variable, in bytes
+int elements(alias var){} // returns the number of elements in an array
+float eval(alias s){}			// evaluate an expression in a char[] variable and returns the float result (0 if error)
+int ieval(alias s){}			// evaluate an expression in a char[] variable and returns the int result (0 if error)
+float execute(alias s){}	// execute a statement in a char[] and return the <return> float value
+float iexecute(alias s){} // execute a statement in a char[] and return the <return> int value
+int defined(alias name){} // 0 if variable is not defined. name is a Char array
+int input(alias s){}			// input a string from keyboard
+int dis(alias var){}			// dissasemble a function
+int strname(alias var, alias str){};	// place the var name in a string
+int strlen(alias s){}			// returns the lenght of the string
+int strcat(alias dst, alias src){}		// concatenate 2 strings
+int strsub(alias dst, alias src, int start, int end){}	// get substring
+int strchr(alias s, char c){}					// return char first occurence in string, or -1 if not found
+int strdel(alias s, int start, int end){}		// delete characters between start and end
+int strins(alias dst, alias src, int pos){} // insert dst in src at pos
+int strcmp(alias s1, alias s2){}		// returns negative if s1 < s2, 0 if s1 == s2, positive if s1 > s2
+int strstr(alias string, alias substring){} // returns substring position, or -1 of not found 
+int printf(){}						// VPN mapped
+int sprintf(){}						// VPN mapped
+float sin(float f){}
+float cos(float f){}
+float tan(float f){}
+float asin(float f){}
+float acos(float f){}
+float atan(float f){}
+float atan2(float x, float y){}
+float exp(float f){}
+float ln(float f){}		// base e
+float log(float f){}	// base 10
+float pow(float base, float exp){}
+float sqrt(float f){}
+int getmem(int addr, int size){}		// 0< size <=4
+int setmem(int addr, int size, int val){} // 0< size <=4
+int gettype(int var){}							// returns 0:NOVAR, 1:CHAR, 2:BYTE, 3:SHORT, 4:WORD, 5:INT, 6:ALIAS, 7:FLOAT, 8:STRUCT
+int Dim(alias var, int dim){}				// returns actual set dimension (<MAX_ARRAY_SIZE). Do not initialize the extension, keeps the initial data
+
+int fopen(alias name, alias mode){} // returns file handle, NULL if error
+int fclose(int handle){}						// returns 0 if OK, -1 on error
+int fgetc(int handle){}							// returns the character read, or -1 on error or EOF
+int fputc(int c, int handle){}			// returns the written character, -1 on error
+int fread(alias buffer, int size, int count, int handle){}	// returns number of items read
+int fwrite(alias buffer, int size, int count, int handle){}	// returns number of items written
+int ftell(int handle){}							// returns the file position
+int fseek(int handle, int offset, int origin){}							// origin: 0=set, 1=cur, 2=end. Returns 0 on success, -1 else
+int feof(int handle){}							// returns != 0 if EOF
+
+int LoadLibrary(alias filename){}
+int FreeLibrary(int handle){}
+int GetProcAddress(int dll, alias name){}
+int Map(alias object, int address, int mode=1){}		// returns object. mode:MAP_NORMAL=1, MAP_IPTR=2, MAP_IPTR_VPN=3, MAP_THISCALL=4
+int MakeProcInstance(alias proc, int thisAdjust=0){}// returns the instance, or 0 on error. The procedure is seen as _stdcall or _thiscall( if thisAdjust<0). thisAdjust (or ~thisAdjust if <0) substracted from <this> for multiple derivation
+int FreeProcInstance(int instance){}								// returns 1 if OK, 0 else
+alias ProcInstCallback;															// (int psInterpreter, alias fn) - debugging purpose
+
+float abs(float i)
+{
+	if(i<0) return -i;
+	return i;
+}
+
+int sgn(int i)
+{
+	if(i<0) return 0xffffffff;
+	return !!i;
+}
+
+int malloc(int size){}
+int realloc(int addr, int size){}
+int free(int addr){}
+int msize(int addr){}												// returns -1 if addr is not allocated
+int memcpy(int dst, int src, int size){}		// use with care, can crash the application
+int system(alias cmd){}

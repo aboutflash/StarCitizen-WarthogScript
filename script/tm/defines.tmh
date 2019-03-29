@@ -1,0 +1,1078 @@
+// TARGET definitions
+// Copyright (c) Thrustmaster
+
+
+// ------------------------------- Virtual keyboard interface ---------------------------------
+define ESC 			1041
+define F1 			1058
+define F2 			1059
+define F3 			1060
+define F4 			1061
+define F5 			1062
+define F6 			1063
+define F7 			1064
+define F8 			1065
+define F9 			1066
+define F10 			1067
+define F11 			1068
+define F12 			1069
+define F13 			1104
+define F14 			1105
+define F15 			1106
+define F16 			1107
+define F17 			1108
+define F18 			1109
+define F19 			1110
+define F20 			1111
+define F21 			1112
+define F22 			1113
+define F23 			1114
+define F24 			1115
+define PRNTSCRN 	1070
+define SCRLCK 		1071
+define BRK 			1072
+define BSP 			1042
+define TAB 			1043
+define CAPS 		1057
+define ENT 			1040
+define LSHF 		1225
+define RSHF 		1229
+define LCTL 		1224
+define LWIN			1227
+define LALT 		1226
+define SHF 			1225
+define ALT 			1226
+define CTL 			1224
+define SPC 			1044
+define RALT 		1230
+define RWIN			1231
+define RCTL 		1228
+define INS 			1073
+define HOME 		1074
+define PGUP 		1075
+define DEL 			1076
+define END 			1077
+define PGDN 		1078
+define UARROW 		1082
+define DARROW 		1081
+define LARROW 		1080
+define RARROW 		1079
+define NUML 		1083
+define KP0 			1098
+define KP1 			1089
+define KP2 			1090
+define KP3 			1091
+define KP4 			1092
+define KP5 			1093
+define KP6 			1094
+define KP7 			1095
+define KP8 			1096
+define KP9 			1097
+define KPENT 		1088
+define APPS			1101
+
+// ASCII keycodes, based on USB codes, for different keyboard layouts
+define ASC_SHF			1000
+define ASC_AGR			1500
+
+short USB[256];
+short ASCE[256]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+					1044,				//0x20	<space>
+					1030 + ASC_SHF,		//0x21	! Exclamation mark
+					1052 + ASC_SHF,		//0x22	" &quot; Double quotes (or speech marks)
+					1032 + ASC_SHF,		//0x23	# Number
+					1033 + ASC_SHF,		//0x24	$ Dollar
+					1034 + ASC_SHF,		//0x25	% Procenttecken
+					1036 + ASC_SHF,		//0x21	& &amp; Ampersand
+					1052,				//0x27	' Single quote
+					1038 + ASC_SHF,	 	//0x28	( Open parenthesis (or open bracket)
+					1039 + ASC_SHF,		//0x29	) Close parenthesis (or close bracket)
+					1037 + ASC_SHF,		//0x2a	* Asterisk
+					1046 + ASC_SHF,		//0x2b	+ Plus
+					1054,				//0x2c	, Comma
+					1045,				//0x2d	- Hyphen
+					1055,				//0x2e	. Period, dot or full stop
+					1056,				//0x2f	/ Slash or divide
+					1039,				//0x30	0 Zero
+					1030,				//0x31	1 One
+					1031,				//0x32	2 Two
+					1032,				//0x33	3 Three
+					1033,				//0x34	4 Four
+					1034,				//0x35	5 Five
+					1035,				//0x36	6 Six
+					1036,				//0x37	7 Seven
+					1037,				//0x38	8 Eight
+					1038,				//0x39	9 Nine
+					1051 + ASC_SHF,		//0x3a	: Colon
+					1051,				//0x3b	; Semicolon
+					1054 + ASC_SHF,		//0x3c	< &lt; Less than (or open angled bracket)
+					1046,				//0x3d	= Equals
+					1055 + ASC_SHF,		//0x3e	> &gt; Greater than (or close angled bracket)
+					1056 + ASC_SHF,		//0x3f	? Question mark
+					1031 + ASC_SHF,		//0x40	@ At symbol
+					1004 + ASC_SHF,		//0x41	A Uppercase A
+					1005 + ASC_SHF,		//0x42	B Uppercase B
+					1006 + ASC_SHF,		//0x43	C Uppercase C
+					1007 + ASC_SHF,		//0x44	D Uppercase D
+					1008 + ASC_SHF,		//0x45	E Uppercase E
+					1009 + ASC_SHF,		//0x46	F Uppercase F
+					1010 + ASC_SHF,		//0x47	G Uppercase G
+					1011 + ASC_SHF,		//0x48	H Uppercase H
+					1012 + ASC_SHF,		//0x49	I Uppercase I
+					1013 + ASC_SHF,		//0x4a	J Uppercase J
+					1014 + ASC_SHF,		//0x4b	K Uppercase K
+					1015 + ASC_SHF,		//0x4c	L Uppercase L
+					1016 + ASC_SHF,		//0x4d	M Uppercase M
+					1017 + ASC_SHF,		//0x4e	N Uppercase N
+					1018 + ASC_SHF,		//0x4f	O Uppercase O
+					1019 + ASC_SHF,		//0x50	P Uppercase P
+					1020 + ASC_SHF,		//0x51	Q Uppercase Q
+					1021 + ASC_SHF,		//0x52	R Uppercase R
+					1022 + ASC_SHF,		//0x53	S Uppercase S
+					1023 + ASC_SHF,		//0x54	T Uppercase T
+					1024 + ASC_SHF,		//0x55	U Uppercase U
+					1025 + ASC_SHF,		//0x56	V Uppercase V
+					1026 + ASC_SHF,		//0x57	W Uppercase W
+					1027 + ASC_SHF,		//0x58	X Uppercase X
+					1028 + ASC_SHF,		//0x59	Y Uppercase Y
+					1029 + ASC_SHF,		//0x5a	Z Uppercase Z
+					1047,				//0x5b	[ Opening bracket
+					1049,				//0x5c	\ Backslash
+					1048,				//0x5d	] Closing bracket
+					1035 + ASC_SHF,		//0x5e	^ Caret - circumflex
+					1045 + ASC_SHF,		//0x5f	_ Underscore
+					1053, 				//0x60	` Grave accent
+					1004,				//0x61	a Lowercase a
+					1005,				//0x62	b Lowercase b
+					1006,				//0x63	c Lowercase c
+					1007,				//0x64	d Lowercase d
+					1008,				//0x65	e Lowercase e
+					1009,				//0x66	f Lowercase f
+					1010,				//0x67	g Lowercase g
+					1011,				//0x68	h Lowercase h
+					1012,				//0x69	i Lowercase i
+					1013,				//0x6a	j Lowercase j
+					1014,				//0x6b	k Lowercase k
+					1015,				//0x6c	l Lowercase l
+					1016,				//0x6d	m Lowercase m
+					1017,				//0x6e	n Lowercase n
+					1018,				//0x6f	o Lowercase o
+					1019,				//0x70	p Lowercase p
+					1020,				//0x71	q Lowercase q
+					1021,				//0x72	r Lowercase r
+					1022,				//0x73	s Lowercase s
+					1023,				//0x74	t Lowercase t
+					1024,				//0x75	u Lowercase u
+					1025,				//0x76	v Lowercase v
+					1026,				//0x77	w Lowercase w
+					1027,				//0x78	x Lowercase x
+					1028,				//0x79	y Lowercase y
+					1029,				//0x7a	z Lowercase z
+					1047 + ASC_SHF,		//0x7b	{ Opening brace
+					1049 + ASC_SHF,		//0x7c	| Vertical bar
+					1048 + ASC_SHF,		//0x7d	} Closing brace
+					1053 + ASC_SHF,		//0x7e	~ Equivalency sign - tilde
+					1076,				//0x7F	delete
+					0,					//0x80	€ &euro; Euro sign
+					0,					//0x81	
+					0,					//0x82	‚ &sbquo; Single low-9 quotation mark
+					0,					//0x83	ƒ &fnof; Latin small letter f with hook
+					0,					//0x84	„ &bdquo; Double low-9 quotation mark
+					0,					//0x85	… &hellip; Horizontal ellipsis
+					0,					//0x86	† &dagger; Dagger
+					0,					//0x87	‡ &Dagger; Double dagger
+					0,					//0x88	ˆ &circ; Modifier letter circumflex accent
+					0,					//0x89	‰ &permil; Per mille sign
+					0,					//0x8A	Š &Scaron; Latin capital letter S with caron
+					0,					//0x8B	‹ &lsaquo; Single left-pointing angle quotation
+					0,					//0x8C	Œ &OElig; Latin capital ligature OE
+					0,					//0x8D	
+					0,					//0x8E	Ž Latin captial letter Z with caron
+					0,					//0x8F	
+					0,					//0x90	
+					0,					//0x91	‘ &lsquo; Left single quotation mark
+					0,					//0x92	’ &rsquo; Right single quotation mark
+					0,					//0x93	“ &ldquo; Left double quotation mark
+					0,					//0x94	” &rdquo; Right double quotation mark
+					0,					//0x95	• &bull; Bullet
+					0,					//0x96	– &ndash; En dash
+					0,					//0x97	— &mdash; Em dash
+					0,					//0x98	˜ &tilde; Small tilde
+					0,					//0x99	™ &trade; Trade mark sign
+					0,					//0x9A	š &scaron; Latin small letter S with caron
+					0,					//0x9B	› &rsaquo; Single right-pointing angle quotation mark
+					0,					//0x9C	œ &oelig; Latin small ligature oe
+					0,					//0x9D
+					0,					//0x9E	ž Latin small letter z with caron
+					0,					//0x9F	Ÿ &yuml; Latin capital letter Y with diaeresis
+					0,					//0xA0	  &nbsp; Non-breaking space
+					0,					//0xA1	¡ &iexcl; Inverted exclamation mark
+					0,					//0xA2	¢ &cent; Cent sign
+					0,					//0xA3	£ &pound; Pound sign
+					0,					//0xA4	¤ &curren; Currency sign
+					0,					//0xA5	¥ &yen; Yen sign
+					0,					//0xA6	¦ &brvbar; Pipe, Broken vertical bar
+					0,					//0xA7	§ &sect; Section sign
+					0,					//0xA8	¨ &uml; Spacing diaeresis - umlaut
+					0,					//0xA9	© &copy; Copyright sign
+					0,					//0xAA	ª &ordf; Feminine ordinal indicator
+					0,					//0xAB	« &laquo; Left double angle quotes
+					0,					//0xAC	¬ &not; Not sign
+					0,					//0xAD	  &shy; Soft hyphen
+					0,					//0xAE	® &reg; Registered trade mark sign
+					0,					//0xAF	¯ &macr; Spacing macron - overline
+					0,					//0xB0	° &deg; Degree sign
+					0,					//0xB1	± &plusmn; Plus-or-minus sign
+					0,					//0xB2	² &sup2; Superscript two - squared
+					0,					//0xB3	³ &sup3; Superscript three - cubed
+					0,					//0xB4	´ &acute; Acute accent - spacing acute
+					0,					//0xB5	µ &micro; Micro sign
+					0,					//0xB6	¶ &para; Pilcrow sign - paragraph sign
+					0,					//0xB7	· &middot; Middle dot - Georgian comma
+					0,					//0xB8	¸ &cedil; Spacing cedilla
+					0,					//0xB9	¹ &sup1; Superscript one
+					0,					//0xBA	º &ordm; Masculine ordinal indicator
+					0,					//0xBB	» &raquo; Right double angle quotes
+					0,					//0xBC	¼ &frac14; Fraction one quarter
+					0,					//0xBD	½ &frac12; Fraction one half
+					0,					//0xBE	¾ &frac34; Fraction three quarters
+					0,					//0xBF	¿ &iquest; Inverted question mark
+					0,					//0xC0	À &Agrave; Latin capital letter A with grave
+					0,					//0xC1	Á &Aacute; Latin capital letter A with acute
+					0,					//0xC2	Â &Acirc; Latin capital letter A with circumflex
+					0,					//0xC3	Ã &Atilde; Latin capital letter A with tilde
+					0,					//0xC4	Ä &Auml; Latin capital letter A with diaeresis
+					0,					//0xC5	Å &Aring; Latin capital letter A with ring above
+					0,					//0xC6	Æ &AElig; Latin capital letter AE
+					0,					//0xC7	Ç &Ccedil; Latin capital letter C with cedilla
+					0,					//0xC8	È &Egrave; Latin capital letter E with grave
+					0,					//0xC9	É &Eacute; Latin capital letter E with acute
+					0,					//0xCA	Ê &Ecirc; Latin capital letter E with circumflex
+					0,					//0xCB	Ë &Euml; Latin capital letter E with diaeresis
+					0,					//0xCC	Ì &Igrave; Latin capital letter I with grave
+					0,					//0xCD	Í &Iacute; Latin capital letter I with acute
+					0,					//0xCE	Î &Icirc; Latin capital letter I with circumflex
+					0,					//0xCF	Ï &Iuml; Latin capital letter I with diaeresis
+					0,					//0xD0	Ð &ETH; Latin capital letter ETH
+					0,					//0xD1	Ñ &Ntilde; Latin capital letter N with tilde
+					0,					//0xD2	Ò &Ograve; Latin capital letter O with grave
+					0,					//0xD3	Ó &Oacute; Latin capital letter O with acute
+					0,					//0xD4	Ô &Ocirc; Latin capital letter O with circumflex
+					0,					//0xD5	Õ &Otilde; Latin capital letter O with tilde
+					0,					//0xD6	Ö &Ouml; Latin capital letter O with diaeresis
+					0,					//0xD7	× &times; Multiplication sign
+					0,					//0xD8	Ø &Oslash; Latin capital letter O with slash
+					0,					//0xD9	Ù &Ugrave; Latin capital letter U with grave
+					0,					//0xDA	Ú &Uacute; Latin capital letter U with acute
+					0,					//0xDB	Û &Ucirc; Latin capital letter U with circumflex
+					0,					//0xDC	Ü &Uuml; Latin capital letter U with diaeresis
+					0,					//0xDD	Ý &Yacute; Latin capital letter Y with acute
+					0,					//0xDE	Þ &THORN; Latin capital letter THORN
+					0,					//0xDF	ß &szlig; Latin small letter sharp s - ess-zed
+					0,					//0xE0	à &agrave; Latin small letter a with grave
+					0,					//0xE1	á &aacute; Latin small letter a with acute
+					0,					//0xE2	â &acirc; Latin small letter a with circumflex
+					0,					//0xE3	ã &atilde; Latin small letter a with tilde
+					0,					//0xE4	ä &auml; Latin small letter a with diaeresis
+					0,					//0xE5	å &aring; Latin small letter a with ring above
+					0,					//0xE6	æ &aelig; Latin small letter ae
+					0,					//0xE7	ç &ccedil; Latin small letter c with cedilla
+					0,					//0xE8	è &egrave; Latin small letter e with grave
+					0,					//0xE9	é &eacute; Latin small letter e with acute
+					0,					//0xEA	ê &ecirc; Latin small letter e with circumflex
+					0,					//0xEB	ë &euml; Latin small letter e with diaeresis
+					0,					//0xEC	ì &igrave; Latin small letter i with grave
+					0,					//0xED	í &iacute; Latin small letter i with acute
+					0,					//0xEE	î &icirc; Latin small letter i with circumflex
+					0,					//0xEF	ï &iuml; Latin small letter i with diaeresis
+					0,					//0xF0	ð &eth; Latin small letter eth
+					0,					//0xF1	ñ &ntilde; Latin small letter n with tilde
+					0,					//0xF2	ò &ograve; Latin small letter o with grave
+					0,					//0xF3	ó &oacute; Latin small letter o with acute
+					0,					//0xF4	ô &ocirc; Latin small letter o with circumflex
+					0,					//0xF5	õ &otilde; Latin small letter o with tilde
+					0,					//0xF6	ö &ouml; Latin small letter o with diaeresis
+					0,					//0xF7	÷ &divide; Division sign
+					0,					//0xF8	ø &oslash; Latin small letter o with slash
+					0,					//0xF9	ù &ugrave; Latin small letter u with grave
+					0,					//0xFA	ú &uacute; Latin small letter u with acute
+					0,					//0xFB	û &ucirc; Latin small letter u with circumflex
+					0,					//0xFC	ü &uuml; Latin small letter u with diaeresis
+					0,					//0xFD	ý &yacute; Latin small letter y with acute
+					0,					//0xFE	þ &thorn; Latin small letter thorn
+					0					//0xFF	ÿ &yuml; Latin small letter y with diaeresis
+					};
+
+short ASCF[256]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+					1044,				//0x20	<space>
+					1056,				//0x21	! Exclamation mark
+					1032,				//0x22	" &quot; Double quotes (or speech marks)
+					1032 + ASC_AGR,		//0x23	# Number
+					1048,				//0x24	$ Dollar
+					1052 + ASC_SHF,		//0x25	% Procenttecken
+					1030,				//0x21	& &amp; Ampersand
+					1033,				//0x27	' Single quote
+					1034,			 	//0x28	( Open parenthesis (or open bracket)
+					1045,				//0x29	) Close parenthesis (or close bracket)
+					1049,				//0x2a	* Asterisk
+					1046 + ASC_SHF,		//0x2b	+ Plus
+					1016,				//0x2c	, Comma
+					1035,				//0x2d	- Hyphen
+					1054 + ASC_SHF,		//0x2e	. Period, dot or full stop
+					1055 + ASC_SHF,		//0x2f	/ Slash or divide
+					1039 + ASC_SHF,		//0x30	0 Zero
+					1030 + ASC_SHF,		//0x31	1 One
+					1031 + ASC_SHF,		//0x32	2 Two
+					1032 + ASC_SHF,		//0x33	3 Three
+					1033 + ASC_SHF,		//0x34	4 Four
+					1034 + ASC_SHF,		//0x35	5 Five
+					1035 + ASC_SHF,		//0x36	6 Six
+					1036 + ASC_SHF,		//0x37	7 Seven
+					1037 + ASC_SHF,		//0x38	8 Eight
+					1038 + ASC_SHF,		//0x39	9 Nine
+					1055,				//0x3a	: Colon
+					1054,				//0x3b	; Semicolon
+					1100,				//0x3c	< &lt; Less than (or open angled bracket)
+					1046,				//0x3d	= Equals
+					1100 + ASC_SHF,		//0x3e	> &gt; Greater than (or close angled bracket)
+					1016 + ASC_SHF,		//0x3f	? Question mark
+					1038 + ASC_AGR,		//0x40	@ At symbol
+					1020 + ASC_SHF,		//0x41	A Uppercase A
+					1005 + ASC_SHF,		//0x42	B Uppercase B
+					1006 + ASC_SHF,		//0x43	C Uppercase C
+					1007 + ASC_SHF,		//0x44	D Uppercase D
+					1008 + ASC_SHF,		//0x45	E Uppercase E
+					1009 + ASC_SHF,		//0x46	F Uppercase F
+					1010 + ASC_SHF,		//0x47	G Uppercase G
+					1011 + ASC_SHF,		//0x48	H Uppercase H
+					1012 + ASC_SHF,		//0x49	I Uppercase I
+					1013 + ASC_SHF,		//0x4a	J Uppercase J
+					1014 + ASC_SHF,		//0x4b	K Uppercase K
+					1015 + ASC_SHF,		//0x4c	L Uppercase L
+					1051 + ASC_SHF,		//0x4d	M Uppercase M
+					1017 + ASC_SHF,		//0x4e	N Uppercase N
+					1018 + ASC_SHF,		//0x4f	O Uppercase O
+					1019 + ASC_SHF,		//0x50	P Uppercase P
+					1004 + ASC_SHF,		//0x51	Q Uppercase Q
+					1021 + ASC_SHF,		//0x52	R Uppercase R
+					1022 + ASC_SHF,		//0x53	S Uppercase S
+					1023 + ASC_SHF,		//0x54	T Uppercase T
+					1024 + ASC_SHF,		//0x55	U Uppercase U
+					1025 + ASC_SHF,		//0x56	V Uppercase V
+					1029 + ASC_SHF,		//0x57	W Uppercase W
+					1027 + ASC_SHF,		//0x58	X Uppercase X
+					1028 + ASC_SHF,		//0x59	Y Uppercase Y
+					1026 + ASC_SHF,		//0x5a	Z Uppercase Z
+					1034 + ASC_AGR,		//0x5b	[ Opening bracket
+					1037 + ASC_AGR,		//0x5c	\ Backslash
+					1045 + ASC_AGR,		//0x5d	] Closing bracket
+					1038 + ASC_AGR,		//0x5e	^ Caret - circumflex
+					1037,				//0x5f	_ Underscore
+					1036 + ASC_AGR,		//0x60	` Grave accent
+					1020,				//0x61	a Lowercase a
+					1005,				//0x62	b Lowercase b
+					1006,				//0x63	c Lowercase c
+					1007,				//0x64	d Lowercase d
+					1008,				//0x65	e Lowercase e
+					1009,				//0x66	f Lowercase f
+					1010,				//0x67	g Lowercase g
+					1011,				//0x68	h Lowercase h
+					1012,				//0x69	i Lowercase i
+					1013,				//0x6a	j Lowercase j
+					1014,				//0x6b	k Lowercase k
+					1015,				//0x6c	l Lowercase l
+					1051,				//0x6d	m Lowercase m
+					1017,				//0x6e	n Lowercase n
+					1018,				//0x6f	o Lowercase o
+					1019,				//0x70	p Lowercase p
+					1004,				//0x71	q Lowercase q
+					1021,				//0x72	r Lowercase r
+					1022,				//0x73	s Lowercase s
+					1023,				//0x74	t Lowercase t
+					1024,				//0x75	u Lowercase u
+					1025,				//0x76	v Lowercase v
+					1029,				//0x77	w Lowercase w
+					1027,				//0x78	x Lowercase x
+					1028,				//0x79	y Lowercase y
+					1026,				//0x7a	z Lowercase z
+					1033 + ASC_AGR,		//0x7b	{ Opening brace
+					1035 + ASC_AGR,		//0x7c	| Vertical bar
+					1046 + ASC_AGR,		//0x7d	} Closing brace
+					1053 + ASC_SHF,		//0x7e	~ Equivalency sign - tilde
+					1076,				//0x7F	delete
+					1008 + ASC_AGR,		//0x80	€ &euro; Euro sign
+					0,					//0x81	
+					0,					//0x82	‚ &sbquo; Single low-9 quotation mark
+					0,					//0x83	ƒ &fnof; Latin small letter f with hook
+					0,					//0x84	„ &bdquo; Double low-9 quotation mark
+					0,					//0x85	… &hellip; Horizontal ellipsis
+					0,					//0x86	† &dagger; Dagger
+					0,					//0x87	‡ &Dagger; Double dagger
+					0,					//0x88	ˆ &circ; Modifier letter circumflex accent
+					0,					//0x89	‰ &permil; Per mille sign
+					0,					//0x8A	Š &Scaron; Latin capital letter S with caron
+					0,					//0x8B	‹ &lsaquo; Single left-pointing angle quotation
+					0,					//0x8C	Œ &OElig; Latin capital ligature OE
+					0,					//0x8D	
+					0,					//0x8E	Ž Latin captial letter Z with caron
+					0,					//0x8F	
+					0,					//0x90	
+					0,					//0x91	‘ &lsquo; Left single quotation mark
+					0,					//0x92	’ &rsquo; Right single quotation mark
+					0,					//0x93	“ &ldquo; Left double quotation mark
+					0,					//0x94	” &rdquo; Right double quotation mark
+					0,					//0x95	• &bull; Bullet
+					0,					//0x96	– &ndash; En dash
+					0,					//0x97	— &mdash; Em dash
+					0,					//0x98	˜ &tilde; Small tilde
+					0,					//0x99	™ &trade; Trade mark sign
+					0,					//0x9A	š &scaron; Latin small letter S with caron
+					0,					//0x9B	› &rsaquo; Single right-pointing angle quotation mark
+					0,					//0x9C	œ &oelig; Latin small ligature oe
+					0,					//0x9D
+					0,					//0x9E	ž Latin small letter z with caron
+					0,					//0x9F	Ÿ &yuml; Latin capital letter Y with diaeresis
+					0,					//0xA0	  &nbsp; Non-breaking space
+					0,					//0xA1	¡ &iexcl; Inverted exclamation mark
+					0,					//0xA2	¢ &cent; Cent sign
+					1033 + ASC_SHF,		//0xA3	£ &pound; Pound sign
+					0,					//0xA4	¤ &curren; Currency sign
+					0,					//0xA5	¥ &yen; Yen sign
+					0,					//0xA6	¦ &brvbar; Pipe, Broken vertical bar
+					1056 + ASC_SHF,		//0xA7	§ &sect; Section sign
+					0,					//0xA8	¨ &uml; Spacing diaeresis - umlaut
+					0,					//0xA9	© &copy; Copyright sign
+					0,					//0xAA	ª &ordf; Feminine ordinal indicator
+					0,					//0xAB	« &laquo; Left double angle quotes
+					0,					//0xAC	¬ &not; Not sign
+					0,					//0xAD	  &shy; Soft hyphen
+					0,					//0xAE	® &reg; Registered trade mark sign
+					0,					//0xAF	¯ &macr; Spacing macron - overline
+					0,					//0xB0	° &deg; Degree sign
+					0,					//0xB1	± &plusmn; Plus-or-minus sign
+					1053,				//0xB2	² &sup2; Superscript two - squared
+					0,					//0xB3	³ &sup3; Superscript three - cubed
+					0,					//0xB4	´ &acute; Acute accent - spacing acute
+					1049 + ASC_SHF,		//0xB5	µ &micro; Micro sign
+					0,					//0xB6	¶ &para; Pilcrow sign - paragraph sign
+					0,					//0xB7	· &middot; Middle dot - Georgian comma
+					0,					//0xB8	¸ &cedil; Spacing cedilla
+					0,					//0xB9	¹ &sup1; Superscript one
+					0,					//0xBA	º &ordm; Masculine ordinal indicator
+					0,					//0xBB	» &raquo; Right double angle quotes
+					0,					//0xBC	¼ &frac14; Fraction one quarter
+					0,					//0xBD	½ &frac12; Fraction one half
+					0,					//0xBE	¾ &frac34; Fraction three quarters
+					0,					//0xBF	¿ &iquest; Inverted question mark
+					0,					//0xC0	À &Agrave; Latin capital letter A with grave
+					0,					//0xC1	Á &Aacute; Latin capital letter A with acute
+					0,					//0xC2	Â &Acirc; Latin capital letter A with circumflex
+					0,					//0xC3	Ã &Atilde; Latin capital letter A with tilde
+					0,					//0xC4	Ä &Auml; Latin capital letter A with diaeresis
+					0,					//0xC5	Å &Aring; Latin capital letter A with ring above
+					0,					//0xC6	Æ &AElig; Latin capital letter AE
+					0,					//0xC7	Ç &Ccedil; Latin capital letter C with cedilla
+					0,					//0xC8	È &Egrave; Latin capital letter E with grave
+					0,					//0xC9	É &Eacute; Latin capital letter E with acute
+					0,					//0xCA	Ê &Ecirc; Latin capital letter E with circumflex
+					0,					//0xCB	Ë &Euml; Latin capital letter E with diaeresis
+					0,					//0xCC	Ì &Igrave; Latin capital letter I with grave
+					0,					//0xCD	Í &Iacute; Latin capital letter I with acute
+					0,					//0xCE	Î &Icirc; Latin capital letter I with circumflex
+					0,					//0xCF	Ï &Iuml; Latin capital letter I with diaeresis
+					0,					//0xD0	Ð &ETH; Latin capital letter ETH
+					0,					//0xD1	Ñ &Ntilde; Latin capital letter N with tilde
+					0,					//0xD2	Ò &Ograve; Latin capital letter O with grave
+					0,					//0xD3	Ó &Oacute; Latin capital letter O with acute
+					0,					//0xD4	Ô &Ocirc; Latin capital letter O with circumflex
+					0,					//0xD5	Õ &Otilde; Latin capital letter O with tilde
+					0,					//0xD6	Ö &Ouml; Latin capital letter O with diaeresis
+					0,					//0xD7	× &times; Multiplication sign
+					0,					//0xD8	Ø &Oslash; Latin capital letter O with slash
+					0,					//0xD9	Ù &Ugrave; Latin capital letter U with grave
+					0,					//0xDA	Ú &Uacute; Latin capital letter U with acute
+					0,					//0xDB	Û &Ucirc; Latin capital letter U with circumflex
+					0,					//0xDC	Ü &Uuml; Latin capital letter U with diaeresis
+					0,					//0xDD	Ý &Yacute; Latin capital letter Y with acute
+					0,					//0xDE	Þ &THORN; Latin capital letter THORN
+					0,					//0xDF	ß &szlig; Latin small letter sharp s - ess-zed
+					1039,				//0xE0	à &agrave; Latin small letter a with grave
+					0,					//0xE1	á &aacute; Latin small letter a with acute
+					0,					//0xE2	â &acirc; Latin small letter a with circumflex
+					0,					//0xE3	ã &atilde; Latin small letter a with tilde
+					0,					//0xE4	ä &auml; Latin small letter a with diaeresis
+					0,					//0xE5	å &aring; Latin small letter a with ring above
+					0,					//0xE6	æ &aelig; Latin small letter ae
+					1038,				//0xE7	ç &ccedil; Latin small letter c with cedilla
+					1036,				//0xE8	è &egrave; Latin small letter e with grave
+					1031,				//0xE9	é &eacute; Latin small letter e with acute
+					0,					//0xEA	ê &ecirc; Latin small letter e with circumflex
+					0,					//0xEB	ë &euml; Latin small letter e with diaeresis
+					0,					//0xEC	ì &igrave; Latin small letter i with grave
+					0,					//0xED	í &iacute; Latin small letter i with acute
+					0,					//0xEE	î &icirc; Latin small letter i with circumflex
+					0,					//0xEF	ï &iuml; Latin small letter i with diaeresis
+					0,					//0xF0	ð &eth; Latin small letter eth
+					0,					//0xF1	ñ &ntilde; Latin small letter n with tilde
+					0,					//0xF2	ò &ograve; Latin small letter o with grave
+					0,					//0xF3	ó &oacute; Latin small letter o with acute
+					0,					//0xF4	ô &ocirc; Latin small letter o with circumflex
+					0,					//0xF5	õ &otilde; Latin small letter o with tilde
+					0,					//0xF6	ö &ouml; Latin small letter o with diaeresis
+					0,					//0xF7	÷ &divide; Division sign
+					0,					//0xF8	ø &oslash; Latin small letter o with slash
+					1052,				//0xF9	ù &ugrave; Latin small letter u with grave
+					0,					//0xFA	ú &uacute; Latin small letter u with acute
+					0,					//0xFB	û &ucirc; Latin small letter u with circumflex
+					0,					//0xFC	ü &uuml; Latin small letter u with diaeresis
+					0,					//0xFD	ý &yacute; Latin small letter y with acute
+					0,					//0xFE	þ &thorn; Latin small letter thorn
+					0					//0xFF	ÿ &yuml; Latin small letter y with diaeresis
+					};
+
+short ASCG[256]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+					1044,				//0x20	<space>
+					1030 + ASC_SHF,		//0x21	! Exclamation mark
+					1031 + ASC_SHF,		//0x22	" &quot; Double quotes (or speech marks)
+					1049,				//0x23	# Number
+					1033 + ASC_SHF,		//0x24	$ Dollar
+					1034 + ASC_SHF,		//0x25	% Procenttecken
+					1035 + ASC_SHF,		//0x21	& &amp; Ampersand
+					1049 + ASC_SHF,		//0x27	' Single quote
+					1037 + ASC_SHF,	 	//0x28	( Open parenthesis (or open bracket)
+					1038 + ASC_SHF,		//0x29	) Close parenthesis (or close bracket)
+					1048 + ASC_SHF,		//0x2a	* Asterisk
+					1048,				//0x2b	+ Plus
+					1054,				//0x2c	, Comma
+					1056,				//0x2d	- Hyphen
+					1055,				//0x2e	. Period, dot or full stop
+					1036 + ASC_SHF,		//0x2f	/ Slash or divide
+					1039,				//0x30	0 Zero
+					1030,				//0x31	1 One
+					1031,				//0x32	2 Two
+					1032,				//0x33	3 Three
+					1033,				//0x34	4 Four
+					1034,				//0x35	5 Five
+					1035,				//0x36	6 Six
+					1036,				//0x37	7 Seven
+					1037,				//0x38	8 Eight
+					1038,				//0x39	9 Nine
+					1055 + ASC_SHF,		//0x3a	: Colon
+					1054 + ASC_SHF,		//0x3b	; Semicolon
+					1100,				//0x3c	< &lt; Less than (or open angled bracket)
+					1039 + ASC_SHF,		//0x3d	= Equals
+					1100 + ASC_SHF,		//0x3e	> &gt; Greater than (or close angled bracket)
+					1045 + ASC_SHF,		//0x3f	? Question mark
+					1004 + ASC_AGR,		//0x40	@ At symbol
+					1004 + ASC_SHF,		//0x41	A Uppercase A
+					1005 + ASC_SHF,		//0x42	B Uppercase B
+					1006 + ASC_SHF,		//0x43	C Uppercase C
+					1007 + ASC_SHF,		//0x44	D Uppercase D
+					1008 + ASC_SHF,		//0x45	E Uppercase E
+					1009 + ASC_SHF,		//0x46	F Uppercase F
+					1010 + ASC_SHF,		//0x47	G Uppercase G
+					1011 + ASC_SHF,		//0x48	H Uppercase H
+					1012 + ASC_SHF,		//0x49	I Uppercase I
+					1013 + ASC_SHF,		//0x4a	J Uppercase J
+					1014 + ASC_SHF,		//0x4b	K Uppercase K
+					1015 + ASC_SHF,		//0x4c	L Uppercase L
+					1016 + ASC_SHF,		//0x4d	M Uppercase M
+					1017 + ASC_SHF,		//0x4e	N Uppercase N
+					1018 + ASC_SHF,		//0x4f	O Uppercase O
+					1019 + ASC_SHF,		//0x50	P Uppercase P
+					1020 + ASC_SHF,		//0x51	Q Uppercase Q
+					1021 + ASC_SHF,		//0x52	R Uppercase R
+					1022 + ASC_SHF,		//0x53	S Uppercase S
+					1023 + ASC_SHF,		//0x54	T Uppercase T
+					1024 + ASC_SHF,		//0x55	U Uppercase U
+					1025 + ASC_SHF,		//0x56	V Uppercase V
+					1026 + ASC_SHF,		//0x57	W Uppercase W
+					1027 + ASC_SHF,		//0x58	X Uppercase X
+					1029 + ASC_SHF,		//0x59	Y Uppercase Y
+					1028 + ASC_SHF,		//0x5a	Z Uppercase Z
+					1037 + ASC_AGR,		//0x5b	[ Opening bracket
+					1045 + ASC_AGR,		//0x5c	\ Backslash
+					1038 + ASC_AGR,		//0x5d	] Closing bracket
+					1053,				//0x5e	^ Caret - circumflex
+					1056 + ASC_SHF,		//0x5f	_ Underscore
+					1046 + ASC_SHF,		//0x60	` Grave accent
+					1004,				//0x61	a Lowercase a
+					1005,				//0x62	b Lowercase b
+					1006,				//0x63	c Lowercase c
+					1007,				//0x64	d Lowercase d
+					1008,				//0x65	e Lowercase e
+					1009,				//0x66	f Lowercase f
+					1010,				//0x67	g Lowercase g
+					1011,				//0x68	h Lowercase h
+					1012,				//0x69	i Lowercase i
+					1013,				//0x6a	j Lowercase j
+					1014,				//0x6b	k Lowercase k
+					1015,				//0x6c	l Lowercase l
+					1016,				//0x6d	m Lowercase m
+					1017,				//0x6e	n Lowercase n
+					1018,				//0x6f	o Lowercase o
+					1019,				//0x70	p Lowercase p
+					1020,				//0x71	q Lowercase q
+					1021,				//0x72	r Lowercase r
+					1022,				//0x73	s Lowercase s
+					1023,				//0x74	t Lowercase t
+					1024,				//0x75	u Lowercase u
+					1025,				//0x76	v Lowercase v
+					1026,				//0x77	w Lowercase w
+					1027,				//0x78	x Lowercase x
+					1029,				//0x79	y Lowercase y
+					1028,				//0x7a	z Lowercase z
+					1036 + ASC_AGR,		//0x7b	{ Opening brace
+					1100 + ASC_AGR,		//0x7c	| Vertical bar
+					1039 + ASC_AGR,		//0x7d	} Closing brace
+					1048 + ASC_AGR,		//0x7e	~ Equivalency sign - tilde
+					1076,				//0x7F	delete
+					1008 + ASC_AGR,		//0x80	€ &euro; Euro sign
+					0,					//0x81	
+					0,					//0x82	‚ &sbquo; Single low-9 quotation mark
+					0,					//0x83	ƒ &fnof; Latin small letter f with hook
+					0,					//0x84	„ &bdquo; Double low-9 quotation mark
+					0,					//0x85	… &hellip; Horizontal ellipsis
+					0,					//0x86	† &dagger; Dagger
+					0,					//0x87	‡ &Dagger; Double dagger
+					0,					//0x88	ˆ &circ; Modifier letter circumflex accent
+					0,					//0x89	‰ &permil; Per mille sign
+					0,					//0x8A	Š &Scaron; Latin capital letter S with caron
+					0,					//0x8B	‹ &lsaquo; Single left-pointing angle quotation
+					0,					//0x8C	Œ &OElig; Latin capital ligature OE
+					0,					//0x8D	
+					0,					//0x8E	Ž Latin captial letter Z with caron
+					0,					//0x8F	
+					0,					//0x90	
+					0,					//0x91	‘ &lsquo; Left single quotation mark
+					0,					//0x92	’ &rsquo; Right single quotation mark
+					0,					//0x93	“ &ldquo; Left double quotation mark
+					0,					//0x94	” &rdquo; Right double quotation mark
+					0,					//0x95	• &bull; Bullet
+					0,					//0x96	– &ndash; En dash
+					0,					//0x97	— &mdash; Em dash
+					0,					//0x98	˜ &tilde; Small tilde
+					0,					//0x99	™ &trade; Trade mark sign
+					0,					//0x9A	š &scaron; Latin small letter S with caron
+					0,					//0x9B	› &rsaquo; Single right-pointing angle quotation mark
+					0,					//0x9C	œ &oelig; Latin small ligature oe
+					0,					//0x9D
+					0,					//0x9E	ž Latin small letter z with caron
+					0,					//0x9F	Ÿ &yuml; Latin capital letter Y with diaeresis
+					0,					//0xA0	  &nbsp; Non-breaking space
+					0,					//0xA1	¡ &iexcl; Inverted exclamation mark
+					0,					//0xA2	¢ &cent; Cent sign
+					0,					//0xA3	£ &pound; Pound sign
+					0,					//0xA4	¤ &curren; Currency sign
+					0,					//0xA5	¥ &yen; Yen sign
+					0,					//0xA6	¦ &brvbar; Pipe, Broken vertical bar
+					1032 + ASC_SHF,		//0xA7	§ &sect; Section sign
+					0,					//0xA8	¨ &uml; Spacing diaeresis - umlaut
+					0,					//0xA9	© &copy; Copyright sign
+					0,					//0xAA	ª &ordf; Feminine ordinal indicator
+					0,					//0xAB	« &laquo; Left double angle quotes
+					0,					//0xAC	¬ &not; Not sign
+					0,					//0xAD	  &shy; Soft hyphen
+					0,					//0xAE	® &reg; Registered trade mark sign
+					0,					//0xAF	¯ &macr; Spacing macron - overline
+					0,					//0xB0	° &deg; Degree sign
+					0,					//0xB1	± &plusmn; Plus-or-minus sign
+					1031 + ASC_AGR,		//0xB2	² &sup2; Superscript two - squared
+					1032 + ASC_AGR,		//0xB3	³ &sup3; Superscript three - cubed
+					0,					//0xB4	´ &acute; Acute accent - spacing acute
+					1016 + ASC_AGR,		//0xB5	µ &micro; Micro sign
+					0,					//0xB6	¶ &para; Pilcrow sign - paragraph sign
+					0,					//0xB7	· &middot; Middle dot - Georgian comma
+					0,					//0xB8	¸ &cedil; Spacing cedilla
+					0,					//0xB9	¹ &sup1; Superscript one
+					0,					//0xBA	º &ordm; Masculine ordinal indicator
+					0,					//0xBB	» &raquo; Right double angle quotes
+					0,					//0xBC	¼ &frac14; Fraction one quarter
+					0,					//0xBD	½ &frac12; Fraction one half
+					0,					//0xBE	¾ &frac34; Fraction three quarters
+					0,					//0xBF	¿ &iquest; Inverted question mark
+					0,					//0xC0	À &Agrave; Latin capital letter A with grave
+					0,					//0xC1	Á &Aacute; Latin capital letter A with acute
+					0,					//0xC2	Â &Acirc; Latin capital letter A with circumflex
+					0,					//0xC3	Ã &Atilde; Latin capital letter A with tilde
+					1052 + ASC_SHF,		//0xC4	Ä &Auml; Latin capital letter A with diaeresis
+					0,					//0xC5	Å &Aring; Latin capital letter A with ring above
+					0,					//0xC6	Æ &AElig; Latin capital letter AE
+					0,					//0xC7	Ç &Ccedil; Latin capital letter C with cedilla
+					0,					//0xC8	È &Egrave; Latin capital letter E with grave
+					0,					//0xC9	É &Eacute; Latin capital letter E with acute
+					0,					//0xCA	Ê &Ecirc; Latin capital letter E with circumflex
+					0,					//0xCB	Ë &Euml; Latin capital letter E with diaeresis
+					0,					//0xCC	Ì &Igrave; Latin capital letter I with grave
+					0,					//0xCD	Í &Iacute; Latin capital letter I with acute
+					0,					//0xCE	Î &Icirc; Latin capital letter I with circumflex
+					0,					//0xCF	Ï &Iuml; Latin capital letter I with diaeresis
+					0,					//0xD0	Ð &ETH; Latin capital letter ETH
+					0,					//0xD1	Ñ &Ntilde; Latin capital letter N with tilde
+					0,					//0xD2	Ò &Ograve; Latin capital letter O with grave
+					0,					//0xD3	Ó &Oacute; Latin capital letter O with acute
+					0,					//0xD4	Ô &Ocirc; Latin capital letter O with circumflex
+					0,					//0xD5	Õ &Otilde; Latin capital letter O with tilde
+					1051 + ASC_SHF,		//0xD6	Ö &Ouml; Latin capital letter O with diaeresis
+					0,					//0xD7	× &times; Multiplication sign
+					0,					//0xD8	Ø &Oslash; Latin capital letter O with slash
+					0,					//0xD9	Ù &Ugrave; Latin capital letter U with grave
+					0,					//0xDA	Ú &Uacute; Latin capital letter U with acute
+					0,					//0xDB	Û &Ucirc; Latin capital letter U with circumflex
+					1047 + ASC_SHF,		//0xDC	Ü &Uuml; Latin capital letter U with diaeresis
+					0,					//0xDD	Ý &Yacute; Latin capital letter Y with acute
+					0,					//0xDE	Þ &THORN; Latin capital letter THORN
+					1045,				//0xDF	ß &szlig; Latin small letter sharp s - ess-zed
+					0,					//0xE0	à &agrave; Latin small letter a with grave
+					0,					//0xE1	á &aacute; Latin small letter a with acute
+					0,					//0xE2	â &acirc; Latin small letter a with circumflex
+					0,					//0xE3	ã &atilde; Latin small letter a with tilde
+					1052,				//0xE4	ä &auml; Latin small letter a with diaeresis
+					0,					//0xE5	å &aring; Latin small letter a with ring above
+					0,					//0xE6	æ &aelig; Latin small letter ae
+					0,					//0xE7	ç &ccedil; Latin small letter c with cedilla
+					0,					//0xE8	è &egrave; Latin small letter e with grave
+					0,					//0xE9	é &eacute; Latin small letter e with acute
+					0,					//0xEA	ê &ecirc; Latin small letter e with circumflex
+					0,					//0xEB	ë &euml; Latin small letter e with diaeresis
+					0,					//0xEC	ì &igrave; Latin small letter i with grave
+					0,					//0xED	í &iacute; Latin small letter i with acute
+					0,					//0xEE	î &icirc; Latin small letter i with circumflex
+					0,					//0xEF	ï &iuml; Latin small letter i with diaeresis
+					0,					//0xF0	ð &eth; Latin small letter eth
+					0,					//0xF1	ñ &ntilde; Latin small letter n with tilde
+					0,					//0xF2	ò &ograve; Latin small letter o with grave
+					0,					//0xF3	ó &oacute; Latin small letter o with acute
+					0,					//0xF4	ô &ocirc; Latin small letter o with circumflex
+					0,					//0xF5	õ &otilde; Latin small letter o with tilde
+					1051,				//0xF6	ö &ouml; Latin small letter o with diaeresis
+					0,					//0xF7	÷ &divide; Division sign
+					0,					//0xF8	ø &oslash; Latin small letter o with slash
+					0,					//0xF9	ù &ugrave; Latin small letter u with grave
+					0,					//0xFA	ú &uacute; Latin small letter u with acute
+					0,					//0xFB	û &ucirc; Latin small letter u with circumflex
+					1047,				//0xFC	ü &uuml; Latin small letter u with diaeresis
+					0,					//0xFD	ý &yacute; Latin small letter y with acute
+					0,					//0xFE	þ &thorn; Latin small letter thorn
+					0					//0xFF	ÿ &yuml; Latin small letter y with diaeresis
+					};
+
+alias ASC = &ASCE;	// english keyboard layout as default
+
+// --------------------------------------  virtual joystick interface --------------------------------------
+define DX1			3000				
+define DX2			3001
+define DX3			3002
+define DX4			3003
+define DX5			3004
+define DX6			3005
+define DX7			3006
+define DX8			3007
+define DX9			3008
+define DX10			3009
+define DX11			3010
+define DX12			3011
+define DX13			3012
+define DX14			3013
+define DX15			3014
+define DX16			3015
+define DX17			3016
+define DX18			3017
+define DX19			3018
+define DX20			3019
+define DX21			3020
+define DX22			3021
+define DX23			3022
+define DX24			3023
+define DX25			3024
+define DX26			3025
+define DX27			3026
+define DX28			3027
+define DX29			3028
+define DX30			3029
+define DX31			3030
+define DX32			3031
+define DXHATUP			3300
+define DXHATUPRIGHT 	3301
+define DXHATRIGHT		3302
+define DXHATDOWNRIGHT 	3303
+define DXHATDOWN		3304
+define DXHATDOWNLEFT 	3305
+define DXHATLEFT		3306
+define DXHATUPLEFT		3307
+
+define DX_X_AXIS		1		
+define DX_Y_AXIS		2
+define DX_Z_AXIS		3
+define DX_XROT_AXIS		4
+define DX_YROT_AXIS		5
+define DX_ZROT_AXIS		6
+define DX_THROTTLE_AXIS 7
+define DX_SLIDER_AXIS 	8
+
+// ------------------------------------------- virtual mouse interface --------------------------------------
+define MOUSE_LEFT		4000			
+define MOUSE_RIGHT		4001
+define MOUSE_CENTER		4002
+define MOUSE_BTN4		4003
+define MOUSE_BTN5		4004
+define MOUSE_X_AXIS		9
+define MOUSE_Y_AXIS		10
+define MOUSE_Z_AXIS		11
+
+
+
+// ------------------------------------- Warthog Joystick interface -------------------------------------
+define TG1				0
+define S2				1
+define S3				2
+define S4				3
+define S1				4
+define TG2				5
+define H2U				6
+define H2R				7
+define H2D				8
+define H2L				9
+define H3U				10
+define H3R				11
+define H3P				11			// on F18 stick
+define H3D				12
+define H3L				13
+define H2P				13			// on F18 stick
+define H4U				14
+define H4R				15
+define H4D				16
+define H4L				17
+define H4P				18
+define H1U				29			// 4 virtual keys generated by the joystick HAT
+define H1R				30
+define H1D				31
+define H1L				32
+define JOYX				IN_POSITION_AXIS_X
+define JOYY				IN_POSITION_AXIS_Y
+define POV 				IN_POSITION_HAT
+
+// -----------------------------------  Warthog Throttle interface --------------------------------
+define SC				0
+define MSP				1
+define MSU				2
+define MSR				3
+define MSD				4
+define MSL				5
+define SPDF				6
+define SPDB				7
+define BSF				8
+define BSB				9
+define CHF				10
+define CHB				11
+define PSF				12
+define PSB				13
+define LTB				14
+define EFLNORM			15
+define EFRNORM			16
+define EOLMOTOR			17
+define EORMOTOR			18
+define APUON			19
+define LDGH				20
+define FLAPU			21
+define FLAPD			22
+define EACON			23
+define RDRNRM			24
+define APENG			25
+define APPAT			26
+define APALT			27
+define IDLERON			28
+define IDLELON			29
+define EOLIGN			30
+define EORIGN			31
+define CSU				32	// 4 virtual buttons generated by the HAT
+define CSR				33
+define CSD				34
+define CSL				35
+define EFLOVER			36  // 8 virtual buttons for 2way switches
+define EFROVER			37
+define APUOFF			38
+define EACOFF			39
+define RDRDIS			40
+define APDIS			41
+define IDLEROFF			42
+define IDLELOFF			43
+define EOLNORM			44	// 8 virtual buttons generated by the 3 way switches
+define EORNORM			45
+define FLAPM			46
+define SPDM				47	
+define BSM				48
+define CHM				49
+define PSM				50
+define APAH				51
+define SCX				IN_POSITION_AXIS_X
+define SCY				IN_POSITION_AXIS_Y
+define THR_RIGHT		IN_POSITION_AXIS_Z
+define THR_LEFT			IN_POSITION_AXIS_RZ
+define THR_FC			IN_POSITION_AXIS_SLIDER1
+define CS				IN_POSITION_HAT
+
+// -----------------------------------  Hoats Cougar interface --------------------------------
+//define TG1			0			// joystick buttons, the same names like warthog joystick
+//define S2				1
+//define S3				2
+//define S4				3
+//define S1				4
+//define TG2			5
+//define H2U			6
+//define H2R			7
+//define H2D			8
+//define H2L			9
+//define H3U			10
+//define H3R			11
+//define H3D			12
+//define H3L			13
+//define H4U			14
+//define H4R			15
+//define H4D			16
+//define H4L			17
+//define H4P			18
+//define H1U			29			// 4 virtual keys generated by the joystick HAT
+//define H1R			30
+//define H1D			31
+//define H1L			32
+//define JOYX			IN_POSITION_AXIS_X
+//define JOYY			IN_POSITION_AXIS_Y
+//define POV 			IN_POSITION_HAT
+
+define T1				18				// throttle buttons
+define T2				19
+define T3				20
+define T4				21
+define T5				22
+define T6				23
+define T7				24
+define T8				25
+define T9				26
+define T10				27
+define DFM				28 				// 2 virtual buttons
+//define SPDM			47
+define THROTTLE			IN_POSITION_AXIS_Z
+define RDR_X			IN_POSITION_AXIS_RX
+define RDR_Y			IN_POSITION_AXIS_RY
+define RUDDER			IN_POSITION_AXIS_RZ
+define MAN_RNG			IN_POSITION_AXIS_SLIDER1
+define ANT_ELEV			IN_POSITION_AXIS_THROTTLE
+
+// -----------------------------------  T16000 interface --------------------------------
+define TS1				0				
+define TS2				1
+define TS3				2
+define TS4				3
+define B5				4
+define B6				5
+define B7				6
+define B8				7
+define B9				8
+define B10				9
+define B11				10
+define B12				11
+define B13				12
+define B14				13
+define B15				14
+define B16				15
+//define H1U			29				// 4 virtual keys generated by the joystick HAT
+//define H1R			30
+//define H1D			31
+//define H1L			32
+//define JOYX			IN_POSITION_AXIS_X
+//define JOYY			IN_POSITION_AXIS_Y
+//define RUDDER			IN_POSITION_AXIS_RZ
+define THR				IN_POSITION_AXIS_SLIDER1
+define HAT 				IN_POSITION_HAT
+
+
+// -----------------------------------  MFD interface --------------------------------
+define OSB01			0				
+define OSB02			1
+define OSB03			2
+define OSB04			3
+define OSB05			4
+define OSB06			5
+define OSB07			6
+define OSB08			7
+define OSB09			8
+define OSB10			9
+define OSB11			10
+define OSB12			11
+define OSB13			12
+define OSB14			13
+define OSB15			14
+define OSB16			15
+define OSB17			16
+define OSB18			17
+define OSB19			18
+define OSB20			19
+define SYMU				20
+define SYMD				21
+define CONU				22
+define COND				23
+define BRTU				24
+define BRTD				25
+define GAINU			26
+define GAIND			27
+
+// -----------------------------------  TWCSThrottle interface --------------------------------
+define TBTN1			0
+define TBTN2			1
+define TBTN3			2
+define TBTN4			3
+define TBTN5			4
+define TLOCK			5
+define THAT1U			6	
+define THAT1R			7
+define THAT1D			8
+define THAT1L			9
+define THAT3U			10	
+define THAT3R			11
+define THAT3D			12
+define THAT3L			13
+define THAT2U			14	// 4 virtual keys generated by the HAT 2
+define THAT2R			15
+define THAT2D			16
+define THAT2L			17
+define TTHR				IN_POSITION_AXIS_Z
+define TRDR				IN_POSITION_AXIS_RZ
+define TANT				IN_POSITION_AXIS_SLIDER2
+define TMSTX			IN_POSITION_AXIS_X
+define TMSTY			IN_POSITION_AXIS_Y
+define TCSRIGHT 		IN_POSITION_AXIS_RX
+define TCSRUDDER		IN_POSITION_AXIS_SLIDER1
+define TCSLEFT 			IN_POSITION_AXIS_RY
+define THAT2			IN_POSITION_HAT
+
+
+// -----------------------------------  TFRP Rudder interface --------------------------------
+define TRPRIGHT 		IN_POSITION_AXIS_X
+define TRUDDER			IN_POSITION_AXIS_Z
+define TRPLEFT 			IN_POSITION_AXIS_Y
+
+// -----------------------------------  TFRPHA Rudder Pendular interface --------------------------------
+define TFRPHA_RIGHT 	IN_POSITION_AXIS_X
+define TFRPHA_RUDDER	IN_POSITION_AXIS_Z
+define TFRPHA_LEFT 		IN_POSITION_AXIS_Y
+
+
+
+// ------------------------------------------- Other constants ------------------------------------------
+define AMAX 			32767		// axis values are between -AMAX and AMAX
+define AMAXF			32768.
+define POVU 			0			// POV control possible values (clockwise angles in degrees)
+define POVUR 			45
+define POVR 			90
+define POVDR 			135
+define POVD 			180
+define POVDL 			225
+define POVL 			270
+define POVUL 			315
+define POVCENTER		-1
+define AXIS_NORMAL		1
+define AXIS_REVERSED	-1
+define MAP_ABSOLUTE		0
+define MAP_RELATIVE		1
+

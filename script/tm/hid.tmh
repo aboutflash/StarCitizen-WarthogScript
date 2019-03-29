@@ -1,0 +1,335 @@
+//////////////////////////////////////////////////////////////////////////
+// Thrustmaster FAST script interpreter
+//
+// general defines and methods to control HID devices
+// this header should be included by all the FAST scripts
+// this file should not be modified
+//////////////////////////////////////////////////////////////////////////
+
+include "sys.tmh"
+
+//////////////////////////////////////////////////////////////////////////
+// events that are sent as the first parameter to EventHandle (see SetEventHandler)
+//////////////////////////////////////////////////////////////////////////
+define EV_HID_NONE				0		//general notification, no operation (not received)
+//define EV_HID_ARRIVED			1		//it's not currently received by the script (it's here for compatibility reasons)
+//define EV_HID_REMOVED			2		//it's not currently received by the script (it's here for compatibility reasons)
+//define EV_HID_UPDATE			3		//it's not currently received by the script (it's here for compatibility reasons)
+define EV_HID_INPUT_DATA		8		//received for events that are removed from the HID queue, 't' time data has only one distinctive event from 't-1' time data
+define EV_HID_INPUT_DATA_FILTER	9		//received for filtered devices, use GameOutput to set the physical device's response
+//define EV_HID_INPUT_DATA_FULL	10		//whole input status, for processing data that returns to the HID device (if support is provided by the interpreter)
+define EV_GAME_DATA				20		//received when data is available from the game
+//user events base, for timers
+define EV_USR					1000	//user events base
+
+//////////////////////////////////////////////////////////////////////////
+//input defines - offsets in the input state vector
+//////////////////////////////////////////////////////////////////////////
+//positions in the input array
+define IN_POSITION_BUTTONS		0
+define IN_POSITION_AXES			256
+define IN_POSITION_HAT			288
+define IN_POSITION_SIZE			296
+
+//axes offsets, to add with IN_POSITION_AXES
+define IN_OFFSET_AXIS_X			0
+define IN_OFFSET_AXIS_Y			1
+define IN_OFFSET_AXIS_Z			2
+define IN_OFFSET_AXIS_RX		3
+define IN_OFFSET_AXIS_RY		4
+define IN_OFFSET_AXIS_RZ		5
+define IN_OFFSET_AXIS_THROTTLE	6
+define IN_OFFSET_AXIS_SLIDER1	7
+define IN_OFFSET_AXIS_SLIDER2	8
+define IN_OFFSET_AXIS_SLIDER3	9
+define IN_OFFSET_AXIS_SLIDER4	10
+
+//axes positions, for direct indexing
+define IN_POSITION_AXIS_X			(IN_POSITION_AXES + IN_OFFSET_AXIS_X)
+define IN_POSITION_AXIS_Y			(IN_POSITION_AXES + IN_OFFSET_AXIS_Y)
+define IN_POSITION_AXIS_Z			(IN_POSITION_AXES + IN_OFFSET_AXIS_Z)
+define IN_POSITION_AXIS_RX			(IN_POSITION_AXES + IN_OFFSET_AXIS_RX)
+define IN_POSITION_AXIS_RY			(IN_POSITION_AXES + IN_OFFSET_AXIS_RY)
+define IN_POSITION_AXIS_RZ			(IN_POSITION_AXES + IN_OFFSET_AXIS_RZ)
+define IN_POSITION_AXIS_THROTTLE	(IN_POSITION_AXES + IN_OFFSET_AXIS_THROTTLE)
+define IN_POSITION_AXIS_SLIDER1		(IN_POSITION_AXES + IN_OFFSET_AXIS_SLIDER1)
+define IN_POSITION_AXIS_SLIDER2		(IN_POSITION_AXES + IN_OFFSET_AXIS_SLIDER2)
+define IN_POSITION_AXIS_SLIDER3		(IN_POSITION_AXES + IN_OFFSET_AXIS_SLIDER3)
+define IN_POSITION_AXIS_SLIDER4		(IN_POSITION_AXES + IN_OFFSET_AXIS_SLIDER4)
+
+//general input limits information
+define IN_MAX_BUTTONS			(IN_POSITION_AXES-IN_POSITION_BUTTONS)	//256
+define IN_MAX_AXES				(IN_POSITION_HAT-IN_POSITION_AXES)		//32
+define IN_MAX_HAT				(IN_POSITION_SIZE-IN_POSITION_HAT)		//8
+
+
+//////////////////////////////////////////////////////////////////////////
+//output defines - used by VirtualOutput
+//////////////////////////////////////////////////////////////////////////
+//HID device type - first parameter to VirtualOutput
+define OUT_TYPE_UNKNOWN			0
+define OUT_TYPE_KEYBOARD		1
+define OUT_TYPE_MOUSE			2
+define OUT_TYPE_GAME			3
+
+//element type - second parameter to VirtualOutput, GetInputValue, GameOutput
+define OUT_ID_BUTTON			0
+define OUT_ID_AXIS				256
+define OUT_ID_HAT				288
+define OUT_ID_HID_MAX			296
+define OUT_ID_TIMER				1000
+define OUT_ID_LED				5000
+
+//specific operation, for some element types - 3rd parameter to VirtualOutput (for buttons and timers)
+define OUT_VALUE_BUTTON_RELEASE			0
+define OUT_VALUE_BUTTON_PRESS			1
+define OUT_VALUE_BUTTON_PRESS_RELEASE	2
+define OUT_VALUE_BUTTON_TOGGLE			3
+
+//define OUT_VALUE_AXIS_COPYREAL			4	//internal use (obsolete)
+//define OUT_VALUE_AXIS_USESPECIFIED		5	//internal use (obsolete)
+
+define OUT_VALUE_TIMER_START			6
+//define OUT_VALUE_TIMER_STARTNOW			7	//internal use (obsolete)
+define OUT_VALUE_TIMER_STOP				8
+
+
+define OUT_ID_LED_BACKLIGHT		5000
+define OUT_ID_LED_1				5001
+define OUT_ID_LED_2				5002
+define OUT_ID_LED_3				5003
+define OUT_ID_LED_4				5004
+define OUT_ID_LED_5				5005
+define OUT_ID_LED_INTENSITY		5100
+
+//////////////////////////////////////////////////////////////////////////
+// mapped arrays for input values.
+// sent from HID USB device to script as a parameter to EventHadler
+//////////////////////////////////////////////////////////////////////////
+short joy1[296];    //1st selected USB device input vector
+short joy2[296];	//2nd selected USB device input vector
+short joy3[296];	//3rd selected USB device input vector
+short joy4[296];	//4th selected USB device input vector
+short joy5[296];    //5th selected USB device input vector
+short joy6[296];	//6th selected USB device input vector
+short joy7[296];	//7th selected USB device input vector
+short joy8[296];	//8th selected USB device input vector
+short joy9[296];    //9th selected USB device input vector
+short joy10[296];	//10th selected USB device input vector
+short joy11[296];	//11th selected USB device input vector
+short joy12[296];	//12th selected USB device input vector
+short joy13[296];   //13th selected USB device input vector
+short joy14[296];	//14th selected USB device input vector
+short joy15[296];	//15th selected USB device input vector
+short joy16[296];	//16th selected USB device input vector
+
+int gameSocketData;	//game data pointer. Volatile, use the callback parameter instead
+
+
+//////////////////////////////////////////////////////////////////////////
+// interpreter mapped methods (available from TmService)
+//////////////////////////////////////////////////////////////////////////
+
+
+//always call this from main when the initialization is done,
+// to set the input events handler for USB HID devices
+//NOTE: managing devices (select USB device or plug virtual device) AFTER this call can result in a deadlock
+//handle_func - a function with the following prototype:  int EventHandle(int type, alias object, int param)
+int SetEventHandler(alias handle_func){}
+
+//[sample]   int EventHandle(int type, alias object, int param)
+//type   - one of EV_HID_* values, depending on the event type (EV_HID_INPUT_DATA_UNIQUE usually)
+//object - one of [joy1, joy2, joy3, joy4...], depending on the device that generated the event
+//param  - index in object; use IN_POSITION_* to determine input type
+
+
+//////////////////////////////////////////////////////////////////////////
+// helper methods 
+//////////////////////////////////////////////////////////////////////////
+
+//returns the mouse cursor's position on the screen (don't use directly)
+//axis  - the requested axis
+int _GetMouse(int axis){};
+
+//returns the mouse cursor's X position on the screen
+int GetMouseX() { return _GetMouse(0); }
+
+//returns the mouse cursor's Y position on the screen
+int GetMouseY() { return _GetMouse(1); }
+
+
+//////////////////////////////////////////////////////////////////////////
+// device data methods (script <> virtual HID device)
+//////////////////////////////////////////////////////////////////////////
+
+//sends a command to the specified virtual HID device, or adds/removes a timer event
+//type  - one of OUT_TYPE_* for device outputs. this parameter is ignored for timers
+//Id    - one of OUT_ID_* + number representing specific index in the selected type
+//        (ex: OUT_ID_AXIS + IN_OFFSET_AXIS_X for X axis)
+//         "OUT_ID_TIMER+<timerIndex>" is supported, with value one of OUT_VALUE_TIMER_* ;
+//         OUT_ID_LED_* is not supported, will be interpreted as a timer
+//value - the value the selected element is set to
+//        button: one of OUT_VALUE_BUTTON_* (OUT_VALUE_BUTTON_PRESS_RELEASE uses delay as interval between press and release)
+//        axis:   the value the axis is set to (range: [-32767, 32767] )
+//        HAT:    the value the hat is set to (-1 for center, [0..360) for a specific angle - the angle will be rounded by hat positions )
+//delay   - specifies a time interval in miliseconds for button press-release (ignored if not needed)
+//NOTE: for OUT_VALUE_BUTTON_PRESS_RELEASE, delay interval is limited to 10seconds (any value that exceeds 10000 will be changed to this limit)
+int VirtualOutput(int type, int Id, int value, int delay=0){}
+
+//returns the current value for a selected input on the virtual controller
+//type  - the device type, one of OUT_TYPE_* (timers are not supported)
+//Id    - the selected input, one of OUT_ID_* + number representing specific index in the selected type
+short GetInputValue(int type, int Id){}
+
+//initializes a timer and starts it
+//type   - event index, use EV_USR+number
+//object - value passed to EventHandler's 'object' parameter when the timer fires
+//param  - value passed to EventHandler's 'param' parameter when the timer fires
+//delay  - delay value of the timer (negative values set a repetitive timer, positive values fire the timer only once)
+int PostEvent(int type, alias object, int param, int delay){}
+
+//removes a timer from the timers list (repetitive or not)
+//type  - the timer type (id) used when it was set
+int RemoveEvent(int type){}
+
+//all the events of type OUT_VALUE_BUTTON_PRESS_RELEASE folowing lock activation are relative to the call time of this method
+//use this to synchronize key pulses; don't forget to unlock as soon as possible, otherwise the release events will not be triggered
+//type      - the device type, one of OUT_TYPE_* (timers are not supported)
+//lockState - 0 if locking is disabled !=0 if locking is enabled
+int LockPulseTimestamps(int type, int lockState){}
+
+//////////////////////////////////////////////////////////////////////////
+// virtual device management methods - call these from main only, before SetEventHandler
+//////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////
+//Virtual device plug methods
+//Note: the first call to a virtual device management method unplugs all the present virtual devices first
+//Note: if any of the methods below fail,
+//      the script run is aborted and a notification message is displayed in the output
+//Warning: calling a plug method twice for the same device type will result in two virtual devices.
+
+
+//plug a virtual keyboard device in the system
+int PlugKeyboard() {}
+
+//plug a virtual mouse device in the system
+//absolute - 0 for relative mouse (mouse position is interpreted as displacement added to the pointer),
+//           1 for absolute mouse (mouse position is the mapped to the pointer position on the screen, the wheel is still relative)
+//           2 for absolute mouse with nullable X,Y axes (pressing a button sends a null value for the axes instead of the current positions, not compatible with some games)
+int PlugMouse(int absolute) {}
+
+//plug a virtual game device in the system - compact device configuration
+//useful for defining game device configurations fast&easy
+//gameConfig - a stGameCfg variable defining the game controller's configuration
+//Note: CONFIG_* arrays can be used
+int PlugGame(alias gameConfig, alias deviceName){}
+
+
+//////////////////////////////////////////////////////////////////////////
+// physical (USB) device management methods - call these from main only, before SetEventHandler
+//////////////////////////////////////////////////////////////////////////
+
+//Selects all the USB devices in one go
+//usbHwidList - an int[] array with hardware id strings
+//              ex: int hwid[2] = {"VID_044F&PID_B10A&REV_0500","VID_044F&PID_0400&REV_0110"};
+//Note: the order the devices apear in the string is the order they are assigned to joy1,2,3,4
+//returns: >=0 on success representing the last device index selected, <0 on error
+int SelectUsbDevices(alias usbHwidList, byte deviceMode=0){}
+
+//Selects a USB device, installs the filter driver, disables the associated HID device
+//and assigns the device to joy# following the call order (1st call assigns joy1, 2nd call joy2, etc.)
+//usbHwid - hardware ID of the device (HWID_* arrays can be used)
+//device mode:
+//		0-disable physical device
+//		1-keep physical device, gather input from device
+//		2-keep physical device, process device input (not fully supported, uses EV_HID_INPUT_DATA_FULL)
+//returns: >=0 on success representing the device's index, <0 on error
+int SelectUsbDevice(alias usbHwid, byte deviceMode=0){}
+
+//gets a selected USB device's configuration
+//the gameConfig array can be used to plug a virtual device with the same characteristics (mirror)
+//devNumber  - the device number that the capabilities are requested for;
+//             from 1 to 4 in the order the devices were selected
+//gameConfig - a stGameCfg variable that is filled upon return:
+//Note: if the parameter is not correct the script run is aborted
+int GetDeviceCapabilities(int devNumber, alias gameConfig){}
+
+//aborts the currently running script
+//the function never returns in the script, the run is aborted immediately after this method is called
+int Abort(){}
+
+//sleeps for the specified time interval
+int Sleep(int milliseconds){}
+
+
+//////////////////////////////////////////////////////////////////////////
+// device mode 2 (process) control ; physical device control
+//////////////////////////////////////////////////////////////////////////
+
+//Sets the output that the (filtered USB) device will send to the system
+//also, it can control physical device properties as specified
+//index - the device index that receives the output (index returned from SelectUSBDevice)
+//        OR the alias of the device input buffer (joy1, joy2,....)
+//Id    - one of OUT_ID_* + number representing specific index in the selected type
+//        (ex: OUT_ID_AXIS + IN_OFFSET_AXIS_X for X axis)
+//        OUT_ID_TIMER is NOT supported
+//        OUT_ID_LED_* is supported, if the device has LED control (use one of OUT_ID_LED_* )
+//value - the value the selected element is set to
+//        button: 1 or 0
+//        axis:   the value the axis is set to (range: [-32767, 32767] )
+//        HAT:    the value the hat is set to (-1 for center, [0..360) for a specific angle - the angle will be rounded by hat positions )
+//        LED:    0=off, 1=on, 2=toggle, OUT_ID_LED_INTENSITY: 0..255 (for Warthog Throttle 6 steps are valid, delta=43)
+//                -1=don't change anything, return current value
+int GameOutput(int index, int Id, int value){}
+
+//////////////////////////////////////////////////////////////////////////
+// extended support
+//////////////////////////////////////////////////////////////////////////
+
+//Creates a server on the specified port to process external data
+//port      - the port number used by the server
+//useUDP    - 0(default) to use TCP protocol, 1 for UDP datagrams
+//interface - 0(default) to install the server on the local interfaces,
+//            a string IP address to use the corresponding interface only
+//NOTE:	TCP needs 2Bytes at the start of each frame indicating the size of the packet ( 2 + size of data that will follow)
+//			this information will not be passed to the callback, but it is needed to separate the frame from the stream
+//			(the size info can be added to the data buffer or with a separate call, before sending the data)
+//		UDP sends the whole packet in one chunk, no extra size information is needed
+//		maximum data size is limited to 4096Bytes
+int InitSocketServer(int port, int useUDP=0, int interface=0){}
+
+
+//////////////////////////////////////////////////////////////////////////
+// device defines, for a clear script
+//////////////////////////////////////////////////////////////////////////
+
+struct stGameCfg
+{
+	byte ButtonsNumber;
+	byte HatPresent;		//hat present or not [1/0]
+	byte AxisX;				//axis present or not [1/0]
+	byte AxisY;
+	byte AxisZ;
+	byte AxisRx;
+	byte AxisRy;
+	byte AxisRz;
+	byte AxisThrottle;
+	byte AxisSlider1;
+	byte AxisSlider2;
+	byte AxisSlider3;
+	byte AxisSlider4;
+}
+
+//hardware IDs, to be used in USB device selection with SelectUsbDevice
+char HWID_T16000[] =          "VID_044F&PID_B10A&REV_0500";
+char HWID_HOTAS[]  =          "VID_044F&PID_0400&REV_0110";
+char HWID_WARTHOG_JOYSTICK[]= "VID_044F&PID_0402&REV_0100";
+char HWID_WARTHOG_THROTTLE[]= "VID_044F&PID_0404&REV_0100";
+
+//device configurations, for virtual devices (to mimic real devices configuration)
+//                            BUT  HAT   X   Y   Z  Rx  Ry  Rz Thrtl SLD1 SLD2 SLD3 SLD4
+stGameCfg CONFIG_T16000=    { 16,   1,  1,  1,  0,  0,  0,  1,    0,   1,   0,   0,   0};
+stGameCfg CONFIG_HOTAS1=    { 18,   1,  1,  1,  0,  0,  0,  0,    0,   0,   0,   0,   0};
+stGameCfg CONFIG_HOTAS2=    { 28,   1,  1,  1,  0,  0,  0,  0,    1,   1,   1,   0,   0};
+
