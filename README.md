@@ -17,6 +17,19 @@ The goal is to use as much of the SC default keybindings to minimize the control
 
  * Apply a few [manual settings](sc-settings/ManualSettings.md) in-game.
 
+## Usage advice
+Since StarCitizen is not yet able to provide status via an API T.A.R.G.E.T. is not able to detect in which state your ship is. This is especially difficult since StarCitizen keybindings still rely on toggle behaviour. This is cool for Mouse/Keyboard players but brings problems with input devices with flip-switches.
+
+To tackle this problem we have to make some assumptions on the ship's state in order to have fun using the HOTAS. Basically this assumption is, that the ship you are entering is spawned without any systems on.
+When you as a pilot enter your pilot seat you should take a brief pre-flight check to bring your HOTAS in the right configuration. 
+ 1. Flip all switches to their neutral/default state!
+ 1. Turn on the `POWER` switch. - Wait for the ship AI confirmation message
+ 1. Then turn on `ENGINES`
+
+### Known Bugs in 3.5.0i
+ * The Reverse Throttle function is working in the exact opposite way as it should. Means: you have to switch the `Inverse Throttle` boat switch permanently **ON** to fly forward and have to release it into neutral position to fly backwards. <br>
+ I hope CIG will fix this before release of 3.5.0.
+
 ## TrackIR
 Looking around in your cockpit is great with TrackIR! But it's absolutely impossible to aim down a gun's sight in FPS mode. Sometimes it's also easier to handle kiosk menus without a moving head.
 To switch between look-around mode and FPS aim-down-sight mode one switch on the HOTAS is dedicated to flip between those two modes.
