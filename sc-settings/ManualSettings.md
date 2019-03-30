@@ -1,12 +1,6 @@
 # Manual settings to do in SC
 The settings described here are essential for the configuration to work, however they are not exported with the keybindings.  *-- sigh*
 
-## Game settings
- > suggested (for general better gameplay)
- * Weapon Gimbal Lock Enabled [No] ==> **YES** (recommended for stick pilots)
- * Lean toggle [Yes] ==> **NO**
- * Lead PIP [Yes] ==> **NO** (Lag PIPs are more accurate)
-
 ## Settings / Deadzones Joystick 1 (HOTAS)
  > Deazones are effectively configured in Warthog script 
 
@@ -19,8 +13,13 @@ The settings described here are essential for the configuration to work, however
  * Slider 1 [0.00]
  * Slider 2 [0.03] ==> **0.00**
 
-## Additional non-default Keybindings (provided by keybindings file)
-No user action required.
+## Suggested but optional Game Settings
+ * Weapon Gimbal Lock Enabled [No] ==> **YES** (recommended for stick pilots)
+ * Lean toggle [Yes] ==> **NO**
+ * Lead PIP [Yes] ==> **NO** (Lag PIPs are more accurate)
+
+## Additional non-default Keybindings (these are provided by keybindings file)
+No user action required here - just for info.
 
  > Mouse / Keyboard
- * Invert Forward/Backward Throttle    [ ] ==> **J**
+ * Invert Forward/Backward Throttle    [ *undefined* ] ==> **J**
