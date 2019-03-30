@@ -2,11 +2,8 @@
 The settings described here are essential for the configuration to work, however they are not exported with the keybindings.  *-- sigh*
 
 ## Game settings
- > mandatory
- * HOTAS Thrust invert toggle [Yes] ==> **NO**
- * Weapon Gimbal Lock Enabled [No] ==> **YES** (recommended for stick pilots)
-
  > suggested (for general better gameplay)
+ * Weapon Gimbal Lock Enabled [No] ==> **YES** (recommended for stick pilots)
  * Lean toggle [Yes] ==> **NO**
  * Lead PIP [Yes] ==> **NO** (Lag PIPs are more accurate)
 

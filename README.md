@@ -27,8 +27,9 @@ When you as a pilot enter your pilot seat you should take a brief pre-flight che
  1. Then turn on `ENGINES`
 
 ### Known Bugs in 3.5.0i
- * The Reverse Throttle function is working in the exact opposite way as it should. Means: you have to switch the `Inverse Throttle` boat switch permanently **ON** to fly forward and have to release it into neutral position to fly backwards. <br>
- I hope CIG will fix this before release of 3.5.0.
+ * The Reverse Throttle function is working in the exact opposite way as it should. Means: you may have to pull the `Inverse Throttle` boat switch permanently into **ON** position to fly forward and have to release it into neutral position to fly backwards. <br>
+ I hope CIG will fix this before release of 3.5.0.<br>
+ It's possible to mitigate this issue by pressing **J** once on your keyboard before flying.
 
 ## TrackIR
 Looking around in your cockpit is great with TrackIR! But it's absolutely impossible to aim down a gun's sight in FPS mode. Sometimes it's also easier to handle kiosk menus without a moving head.

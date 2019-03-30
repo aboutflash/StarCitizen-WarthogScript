@@ -355,7 +355,7 @@
         <ControlIndex>10</ControlIndex>
         <Events>
           <HidCommand0>
-            <EventName>Reverse Primary Thrusters TOGGLE</EventName>
+            <EventName>Reverse Primary Thrusters ON</EventName>
             <IsSequence>False</IsSequence>
             <Layers>1 2 16 32 64</Layers>
             <Delay>-1</Delay>
@@ -380,7 +380,7 @@
               <DeviceNumber>-1</DeviceNumber>
               <Name>j</Name>
               <HidType>1</HidType>
-              <EventType>4</EventType>
+              <EventType>3</EventType>
               <ActionType>1</ActionType>
               <ControlIndex>13</ControlIndex>
             </HidEvent0>
@@ -429,6 +429,37 @@
         <ControlIndex>10</ControlIndex>
         <Events>
           <HidCommand0>
+            <EventName>Reverse Primary Thrusters OFF</EventName>
+            <IsSequence>False</IsSequence>
+            <Layers>1 2 16 32 64</Layers>
+            <Delay>-1</Delay>
+            <Comment>
+            </Comment>
+            <EventsNumber>1</EventsNumber>
+            <StartTrigger>0</StartTrigger>
+            <StopTrigger>0</StopTrigger>
+            <CurveType>0</CurveType>
+            <Lower>0</Lower>
+            <Center>0</Center>
+            <Upper>0</Upper>
+            <Trim>0</Trim>
+            <Curve>0</Curve>
+            <Zoom>0</Zoom>
+            <Rotate>0</Rotate>
+            <AxisIsReversed>False</AxisIsReversed>
+            <AxisIsRelative>False</AxisIsRelative>
+            <XPosition>50</XPosition>
+            <YPosition>50</YPosition>
+            <HidEvent0>
+              <DeviceNumber>-1</DeviceNumber>
+              <Name>j</Name>
+              <HidType>1</HidType>
+              <EventType>3</EventType>
+              <ActionType>1</ActionType>
+              <ControlIndex>13</ControlIndex>
+            </HidEvent0>
+          </HidCommand0>
+          <HidCommand1>
             <EventName>Reverse LED OFF</EventName>
             <IsSequence>False</IsSequence>
             <Layers>1 2 16 32 64</Layers>
@@ -458,7 +489,7 @@
               <ActionType>4</ActionType>
               <ControlIndex>5</ControlIndex>
             </HidEvent0>
-          </HidCommand0>
+          </HidCommand1>
         </Events>
       </HidEvent>
     </Event8>

@@ -28,49 +28,12 @@ int main()
 	SetShiftButton(&Joystick, S4, &Throttle, FLAPU, FLAPD, 0);
 
 	mapping();
-
 	startup_illumination();
 }
 
 int EventHandle(int type, alias o, int x)
 {
 	DefaultMapping(&o, x);
-}
-
-int startup_illumination()
-{
-
-	if (log_level > 0)
-		printf("... illuminate throttle\x0a");
-
-	ActKey(KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT - LED0));
-	ActKey(KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0));
-
-	int count = 0;
-	ActKey(KEYON + CHAIN(
-					   D(),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5),
-					   D(delay_ms * count),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5),
-					   D(),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4),
-					   D(delay_ms * (count + 1)),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4),
-					   D(),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED3),
-					   D(delay_ms * (count + 1)),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3),
-					   D(),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED2),
-					   D(delay_ms * (count + 1)),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2),
-					   D(),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1),
-					   D(delay_ms * (count + 1)),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1),
-					   LED(&Throttle, LED_INTENSITY, 43)));
-
-	// ActKey(KEYON+LED(&Throttle, LED_INTENSITY, 43));
 }
 
 int mapping()
@@ -97,7 +60,7 @@ int throttle_maps()
 	MapKeyIOUMD(&Throttle, SPDF, CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)), CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)), CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)), CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)), CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)), CHAIN(L_SHIFT, D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)));
 	MapKeyRIOUMD(&Throttle, SPDF, LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1));
 	MapKeyIOUMD(&Throttle, SPDB, 'x', 'x', 'x', 'x', 'x', 'x');
-	MapKeyIOUMD(&Throttle, BSB, CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN('j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)));
+	MapKeyIOUMD(&Throttle, BSB, CHAIN(PULSE + 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN(PULSE + 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN(PULSE + 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN(PULSE + 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN(PULSE + 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)), CHAIN(PULSE + 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)));
 	MapKeyRIOUMD(&Throttle, BSB, LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5));
 	MapKeyIOUMD(&Throttle, CHF, PULSE + 'h', PULSE + 'h', PULSE + 'h', PULSE + 'h', PULSE + 'h', PULSE + 'h');
 	MapKeyIOUMD(&Throttle, CHB, PULSE + 'g', PULSE + 'g', PULSE + 'g', PULSE + 'g', PULSE + 'g', PULSE + 'g');
@@ -161,4 +124,40 @@ int joystick_maps()
 	SetSCurve(&Joystick, JOYX, 0, 0, 0, 2, 0);
 	MapAxis(&Joystick, JOYY, DX_Y_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 	SetSCurve(&Joystick, JOYY, 0, 0, 0, 2, 0);
+}
+
+int startup_illumination()
+{
+
+	if (log_level > 0)
+		printf("... illuminate throttle\x0a");
+
+	ActKey(KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT - LED0));
+	ActKey(KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0));
+
+	int count = 0;
+	ActKey(KEYON + CHAIN(
+					   D(),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5),
+					   D(delay_ms * count),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5),
+					   D(),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4),
+					   D(delay_ms * (count + 1)),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4),
+					   D(),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED3),
+					   D(delay_ms * (count + 1)),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3),
+					   D(),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED2),
+					   D(delay_ms * (count + 1)),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2),
+					   D(),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1),
+					   D(delay_ms * (count + 1)),
+					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1),
+					   LED(&Throttle, LED_INTENSITY, 43)));
+
+	// ActKey(KEYON+LED(&Throttle, LED_INTENSITY, 43));
 }
