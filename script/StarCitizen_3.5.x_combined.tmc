@@ -1,8 +1,9 @@
 include "tm/target.tmh"
 
-	int log_level = 1;
-alias version = "3.5.0i";
+int log_level = 1;
 int delay_ms = 100;
+
+alias version = "3.5.0m";
 
 int main()
 {
@@ -35,7 +36,7 @@ int EventHandle(int type, alias o, int x)
 {
 	if (log_level > 1)
 		printf(">> control: %i\x0a", x);
-		
+
 	DefaultMapping(&o, x);
 }
 
