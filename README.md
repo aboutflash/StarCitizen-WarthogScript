@@ -7,7 +7,7 @@ The goal is to use as much of the SC default keybindings to minimize the control
  * You need to have the Thrustmaster T.A.R.G.E.T. software version v3.0.18.328 installed
 
 ## How to run
- * Download latest [release .zip](https://github.com/aboutflash/StarCitizen-WarthogScript/releases/tag/0.1.0) and unzip the contents of it. <br>Alternatively check out or download the files under ```./script```. All of it.
+ * Download latest [release .zip](https://github.com/aboutflash/StarCitizen-WarthogScript/releases/tag/0.1.1) and unzip the contents of it. <br>Alternatively check out or download the files under ```./script```. All of it.
  * Point your T.A.R.G.E.T. software to run the script directly w/o loading the GUI.<br>
  ```"C:\Program Files (x86)\Thrustmaster\TARGET\x64\TARGETGUI.exe" -r E:\StarCitizen-WarthogScript\script\StarCitizen_3.5.x_combined.tmc```<br>
  Where the latter path is obviously the location where you've copied the scripts to.
