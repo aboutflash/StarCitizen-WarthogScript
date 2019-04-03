@@ -10,6 +10,6 @@ echo "creating $outfile ..."
 echo
 
 cd ..
-git archive -o "$outfile" HEAD ./sc-settings/ ./script/
+git archive -o "$outfile" HEAD ./sc-settings/ ./script/ ./README.md
 
 read -p "Press any key to continue... " -n1 -s
