@@ -3,6 +3,9 @@
 A simple Warthog HOTAS setup to match the current SC control schema.
 The goal is to use as much of the SC default keybindings to minimize the controllers setup ordeal between releases.
 
+## Prerequisites
+ * You need to have the Thrustmaster T.A.R.G.E.T. software version v3.0.18.328 installed
+
 ## How to run
  * Check out or download the files under ```./script```. All of it.
  * Point your T.A.R.G.E.T. software to run the script directly w/o loading the GUI.<br>
@@ -26,7 +29,7 @@ When you as a pilot enter your pilot seat you should take a brief pre-flight che
  1. Turn on the `POWER` switch. - Wait for the ship AI confirmation message
  1. Then turn on `ENGINES`
 
-### Known Bugs in 3.5.0i
+### Known Bugs in 3.5.0m
  * The Reverse Throttle function is working in the exact opposite way as it should. Means: you may have to pull the `Inverse Throttle` boat switch permanently into **ON** position to fly forward and have to release it into neutral position to fly backwards. <br>
  I hope CIG will fix this before release of 3.5.0.<br>
  It's possible to mitigate this issue by pressing **J** once on your keyboard before flying.

@@ -33,6 +33,9 @@ int main()
 
 int EventHandle(int type, alias o, int x)
 {
+	if (log_level > 1)
+		printf(">> control: %i\x0a", x);
+		
 	DefaultMapping(&o, x);
 }
 
