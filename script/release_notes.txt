@@ -1,0 +1,29 @@
+
+v0.1.2
+Tested with SC 3.5.0o
+In TARGET script
+- Fixed landing gear / autoland function.
+- Fixed QuantumDrive spool / QT engage function.
+- Moved strafe from SLEW axis to stick POV1 hat.
+- Moved power management to SLEW axis.
+- Moved scanning control to DMS hat.
+- Added Roll to Throttle MIC thumb hat.
+- Moved Couple/Decouple toggle to MIC thumb button push.
+
+In StarCiticen keybinds
+- removed dynamic zoom from mouse scroll wheel and moved it to mouse button 4 and 5 (if available).
+
+v0.1.1
+Tested with SC 3.5.0m
+- Fixed SC keybinds.
+- Added dark versions of the reference image.
+
+v0.1.0
+Tested with SC 3.5.0i
+- First basic test version.
+The StarCitizen profile contains mappings for 4 Devices
+ * Keyboard
+ * Mouse
+ * TARGET emulated HOTAS freom actual Warthog throttle and stick
+ * MadCatz Combat rudder pedals
+ The pedals can be ignored by users w/o rudder pedals.

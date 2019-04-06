@@ -7,7 +7,8 @@ The goal is to use as much of the SC default keybindings to minimize the control
  * You need to have the Thrustmaster T.A.R.G.E.T. software version v3.0.18.328 installed
 
 ## How to run
- * Download latest [release .zip](https://github.com/aboutflash/StarCitizen-WarthogScript/releases/tag/0.1.1) and unzip the contents of it. <br>Alternatively check out or download the files under ```./script```. All of it.
+ * Download latest [release .zip](https://github.com/aboutflash/StarCitizen-WarthogScript/releases/tag/0.1.2) and unzip the contents of it. <br>Alternatively check out or download the files under ```./script```. All of it.<br>
+ See what's new in the [Release notes](script/release_notes.txt).
  * Point your T.A.R.G.E.T. software to run the script directly w/o loading the GUI.<br>
  ```"C:\Program Files (x86)\Thrustmaster\TARGET\x64\TARGETGUI.exe" -r E:\StarCitizen-WarthogScript\script\StarCitizen_3.5.x_combined.tmc```<br>
  Where the latter path is obviously the location where you've copied the scripts to.
@@ -43,6 +44,11 @@ In order to work with your TrackIR configuration you should bind the **PAUSE** f
 
 Here's an overview of the currently mapped functions to the HOTAS buttons and axis.
 ![Functional Button/Axis Mapping](resources/warthog_layout.png "Warthog HOTAS function mapping")
+
+Here are also some other variants. The dark ones are perfekt as a reference in typical gaming environments. You can also use them as screen background.<br>
+* [Functions Layout](resources/warthog_layout.png) (original size 3524 x 2624px, light)
+* [16:9 variant (dark)](resources/Wallpaper_16by9.png) (1920 x 1080px - dark)
+* [16:10 variant (dark)](resources/Wallpaper_16by10.png) (2560 x 1600px - dark)
  
 ## Trouble shooting
 In this manual I assume, that the Warthog HOTAS is the only controller you have attached to your PC (besides Rudder Pedals, if you have).
