@@ -1,0 +1,11 @@
+
+define LEDsON                   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0)
+define LEDsOFF                  LED(&Throttle, LED_ONOFF, LED_CURRENT - LED0)
+define LEDs43                   LED(&Throttle, LED_INTENSITY, 43)
+define LEDs86                   LED(&Throttle, LED_INTENSITY, 86)
+
+// region Defines
+define TrackIRPause_Toggle      PULSE + DEL
+define TrackIRRecenter_Toggle   PULSE + HOME
+define Power_Toggle             PULSE + 'u'
+define ReverseThrust_Toggle     PULSE + 'j'

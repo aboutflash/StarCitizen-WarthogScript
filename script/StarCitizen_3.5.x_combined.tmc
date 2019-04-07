@@ -1,10 +1,8 @@
 include "tm/target.tmh";
+include "sc_bindings.ttm";
+
 int log_level = 1;
 int delay_ms = 100;
-int blinkrate_ms = 400;
-
-// function definitions
-int Blink_LED5;
 
 alias version = "3.5.0p";
 
@@ -43,6 +41,30 @@ int EventHandle(int type, alias o, int x)
 	DefaultMapping(&o, x);
 }
 
+// region Private action functions
+// REXEC process IDs
+int ReverseThrustRIDX = 0x0001;
+int AfterburnerRIDX = 0x0002;
+
+int Blink_LED(int led, int blinkrate)
+{
+	ActKey(KEYON + CHAIN(LED(&Throttle, LED_ONOFF, LED_CURRENT + led), D(blinkrate), LED(&Throttle, LED_ONOFF, LED_CURRENT - led)));
+}
+
+int BlinkReverseThrust()
+{
+	ActKey(KEYON + StopAutoRepeat(ReverseThrustRIDX));
+	ActKey(KEYON + REXEC(ReverseThrustRIDX, 800, "Blink_LED(LED5, 400);", RNOSTOP));
+}
+
+int BlinkAfterburner()
+{
+	ActKey(KEYON + StopAutoRepeat(AfterburnerRIDX));
+	ActKey(KEYON + REXEC(AfterburnerRIDX, 300, "Blink_LED(LED1, 150);", RNOSTOP));
+}
+// endregion
+
+// region Function mapping
 int mapping()
 {
 
@@ -59,28 +81,25 @@ int throttle_maps()
 	if (log_level > 0)
 		printf("... add throttle mappings\x0a");
 
-	// function assignments
-	Blink_LED5 = CHAIN(LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5), D(blinkrate_ms), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5));
-
 	// keys
 	MapKey(&Throttle, SC, CHAIN(PULSE + F10, D(60), PULSE + F10));
 	MapKey(&Throttle, MSP, PULSE + 'v');
 	MapKey(&Throttle, MSU, 'q');
 	MapKey(&Throttle, MSD, 'e');
-	MapKey(&Throttle, SPDF, LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1));
-	MapKeyR(&Throttle, SPDF, LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1));
+	MapKey(&Throttle, SPDF, EXEC("BlinkAfterburner();"));
+	MapKeyR(&Throttle, SPDF, EXEC("StopAutoRepeat(AfterburnerRIDX);"));
 	MapKey(&Throttle, SPDB, 'x');
-	MapKey(&Throttle, BSB, CHAIN(PULSE + 'j', D(), REXEC(1, blinkrate_ms * 2, "ActKey(KEYON + Blink_LED5);", RNOSTOP)));
-	MapKeyR(&Throttle, BSB, CHAIN(PULSE + 'j', D(), EXEC("StopAutoRepeat(1);")));
+	MapKey(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("BlinkReverseThrust();")));
+	MapKeyR(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("StopAutoRepeat(ReverseThrustRIDX);")));
 	MapKey(&Throttle, CHF, PULSE + 'h');
 	MapKey(&Throttle, CHB, PULSE + 'g');
 	MapKey(&Throttle, PSF, PULSE + 't');
 	MapKeyR(&Throttle, PSF, PULSE + 't');
 	MapKey(&Throttle, LTB, 'z');
-	MapKey(&Throttle, EFLNORM, CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0)));
-	MapKeyR(&Throttle, EFLNORM, CHAIN(PULSE + 'u', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0)));
-	MapKey(&Throttle, EFRNORM, CHAIN(PULSE + HOME, D(100), PULSE + DEL));
-	MapKeyR(&Throttle, EFRNORM, CHAIN(D(100), PULSE + DEL));
+	MapKey(&Throttle, EFLNORM, CHAIN(Power_Toggle, D(), LEDsON, D(), LEDs86));
+	MapKeyR(&Throttle, EFLNORM, CHAIN(Power_Toggle, D(), LEDsON, D(), LEDs43));
+	MapKey(&Throttle, EFRNORM, CHAIN(TrackIRRecenter_Toggle, D(100), TrackIRPause_Toggle));
+	MapKeyR(&Throttle, EFRNORM, CHAIN(D(100), TrackIRPause_Toggle));
 	MapKey(&Throttle, EOLMOTOR, PULSE + 'p');
 	MapKey(&Throttle, EORMOTOR, PULSE + 'o');
 	// turn on engines and send one 'J' in order to deactivate the initially main thrusters inversion (Probably a bug in SC)
@@ -150,15 +169,17 @@ int joystick_maps()
 	MapAxis(&Joystick, JOYY, DX_Y_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 	SetSCurve(&Joystick, JOYY, 0, 0, 0, 2, 0);
 }
+// endregion
 
+// region General functions
 int startup_illumination()
 {
 
 	if (log_level > 0)
 		printf("... illuminate throttle\x0a");
 
-	ActKey(KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT - LED0));
-	ActKey(KEYON + LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0));
+	ActKey(KEYON + LEDsOFF);
+	ActKey(KEYON + LEDsON);
 
 	int count = 0;
 	ActKey(KEYON + CHAIN(
@@ -182,5 +203,6 @@ int startup_illumination()
 					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1),
 					   D(delay_ms * (count + 1)),
 					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1),
-					   LED(&Throttle, LED_INTENSITY, 43)));
+					   LEDs43));
 }
+// endregion
