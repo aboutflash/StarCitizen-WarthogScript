@@ -1,7 +1,10 @@
-include "tm/target.tmh"
-
+include "tm/target.tmh";
 int log_level = 1;
 int delay_ms = 100;
+int blinkrate_ms = 400;
+
+// function definitions
+int Blink_LED5;
 
 alias version = "3.5.0p";
 
@@ -56,6 +59,9 @@ int throttle_maps()
 	if (log_level > 0)
 		printf("... add throttle mappings\x0a");
 
+	// function assignments
+	Blink_LED5 = CHAIN(LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5), D(blinkrate_ms), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5));
+
 	// keys
 	MapKey(&Throttle, SC, CHAIN(PULSE + F10, D(60), PULSE + F10));
 	MapKey(&Throttle, MSP, PULSE + 'v');
@@ -64,8 +70,8 @@ int throttle_maps()
 	MapKey(&Throttle, SPDF, LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1));
 	MapKeyR(&Throttle, SPDF, LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1));
 	MapKey(&Throttle, SPDB, 'x');
-	MapKey(&Throttle, BSB, CHAIN(PULSE + 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)));
-	MapKeyR(&Throttle, BSB, CHAIN(PULSE + 'j', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5)));
+	MapKey(&Throttle, BSB, CHAIN(PULSE + 'j', D(), REXEC(1, blinkrate_ms * 2, "ActKey(KEYON + Blink_LED5);", RNOSTOP)));
+	MapKeyR(&Throttle, BSB, CHAIN(PULSE + 'j', D(), EXEC("StopAutoRepeat(1);")));
 	MapKey(&Throttle, CHF, PULSE + 'h');
 	MapKey(&Throttle, CHB, PULSE + 'g');
 	MapKey(&Throttle, PSF, PULSE + 't');
