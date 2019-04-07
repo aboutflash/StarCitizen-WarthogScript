@@ -1,4 +1,11 @@
 
+current master (WIP)
+Tested with SC 3.5.0p
+Improved script readability.
+- Separated SC keybindings into macros.
+- Added flashing indicator if reverse thrust is active.
+- Added flashing indicator if afterburner is active.
+
 v0.1.2
 Tested with SC 3.5.0o
 In TARGET script
