@@ -209,7 +209,6 @@ int startup_illumination()
 		printf("... illuminate throttle\x0a");
 
 	ActKey(KEYON + LEDsOFF);
-	ActKey(KEYON + LEDsON);
 
 	int count = 0;
 	ActKey(KEYON + CHAIN(D(), LED5_ON, D(delay_ms * count), LED5_OFF,
@@ -217,6 +216,6 @@ int startup_illumination()
 						 D(), LED3_ON, D(delay_ms * (count + 1)), LED3_OFF,
 						 D(), LED2_ON, D(delay_ms * (count + 1)), LED2_OFF,
 						 D(), LED1_ON, D(delay_ms * (count + 1)), LED1_OFF,
-						 LEDs43));
+						 LEDsON, LEDs43));
 }
 // endregion
