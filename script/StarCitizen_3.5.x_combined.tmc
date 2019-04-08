@@ -91,7 +91,7 @@ int throttle_maps()
 
 	MapKey(&Throttle, MSD, RollRight_HOLD);
 
-	MapKey(&Throttle, SPDF, EXEC("BlinkAfterburner();"));
+	MapKey(&Throttle, SPDF, CHAIN(Afterburner_HOLD, D(), EXEC("BlinkAfterburner();")));
 	MapKeyR(&Throttle, SPDF, EXEC("StopAutoRepeat(AfterburnerRIDX);"));
 
 	MapKey(&Throttle, SPDB, SpaceBrake_HOLD);

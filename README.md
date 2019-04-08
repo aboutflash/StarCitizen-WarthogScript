@@ -65,5 +65,7 @@ You have 2 options to solve this issue.
  1. Import the HOTAS keybindings to a different slot.<br>
  *This requires also to adjust the deadzones for that slot! See [manual settings](sc-settings/ManualSettings.md))*
 
+ If you happen to use TeamSpeak 3 on Windows 10 and find your T.A.R.G.E.T. software to hang or crash once you've loaded Teamspeak, then navigate to ```C:\Program Files (x86)\Thrustmaster\TARGET\x64\DeviceManagementApp.exe``` and rename or delete it.
+
 ## Further reading
 1. CIG documentation on keybinding management ['Create, export and import custom profiles'](https://support.robertsspaceindustries.com/hc/en-us/articles/360000183328-Create-export-and-import-custom-profiles)

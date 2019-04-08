@@ -56,6 +56,7 @@ define PowerBalanced            PULSE + F8
 define PowerToEngines_HOLD      F5
 define PowerToShields_HOLD      F6
 define PowerToWeapons_HOLD      F7
+define Afterburner_HOLD         L_SHIFT
 
 define Modifier_DN              DOWN + L_ALT
 define Modifier_UP              UP + L_ALT
