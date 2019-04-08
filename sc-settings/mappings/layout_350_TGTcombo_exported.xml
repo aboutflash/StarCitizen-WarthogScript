@@ -15,18 +15,21 @@
  <deviceoptions name="Thrustmaster Virtual Game Controller (root) {FFFF044F-0000-0000-0000-504944564944}">
   <option input="x" deadzone="0"/>
   <option input="y" deadzone="0"/>
-  <option input="z" deadzone="0"/>
   <option input="rotx" deadzone="0"/>
   <option input="roty" deadzone="0"/>
   <option input="rotz" deadzone="0"/>
   <option input="slider2" deadzone="0"/>
+  <option input="z" deadzone="0"/>
  </deviceoptions>
  <options type="keyboard" instance="1" Product="Keyboard {6F1D2B61-D5A0-11CF-BFC7-444553540000}"/>
  <options type="joystick" instance="1" Product="Thrustmaster Virtual Game Controller (root) {FFFF044F-0000-0000-0000-504944564944}">
+  <turret_aim_pitch exponent="0.79999995"/>
+  <turret_aim_yaw exponent="0.79999995"/>
+ </options>
+ <options type="joystick" instance="2" Product="Mad Catz Pro Flight Combat Rudder Pedals {076406A3-0000-0000-0000-504944564944}">
   <turret_aim_pitch exponent="0.69999993"/>
   <turret_aim_yaw exponent="0.69999993"/>
  </options>
- <options type="joystick" instance="2" Product="Mad Catz Pro Flight Combat Rudder Pedals {076406A3-0000-0000-0000-504944564944}"/>
  <modifiers />
  <actionmap name="spaceship_movement">
   <action name="v_afterburner">
@@ -172,10 +175,10 @@
    <rebind input="js1_ "/>
   </action>
   <action name="pc_zoom_in">
-   <rebind input="kb1_ "/>
+   <rebind input="kb1_mouse5"/>
   </action>
   <action name="pc_zoom_out">
-   <rebind input="kb1_ "/>
+   <rebind input="kb1_mouse4"/>
   </action>
  </actionmap>
 </ActionMaps>
