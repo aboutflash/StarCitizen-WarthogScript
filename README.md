@@ -7,7 +7,7 @@ The goal is to use as much of the SC default keybindings to minimize the control
  * You need to have the Thrustmaster T.A.R.G.E.T. software version v3.0.18.328 installed
 
 ## How to run
- * Download latest [release .zip](https://github.com/aboutflash/StarCitizen-WarthogScript/releases/tag/0.1.2) and unzip the contents of it. <br>Alternatively check out or download the files under ```./script```. All of it.<br>
+ * Download latest [release .zip](https://github.com/aboutflash/StarCitizen-WarthogScript/releases/tag/0.1.3) and unzip the contents of it. <br>Alternatively check out or download the files under ```./script```. All of it.<br>
  See what's new in the [Release notes](script/release_notes.txt).
  * Point your T.A.R.G.E.T. software to run the script directly w/o loading the GUI.<br>
  ```"C:\Program Files (x86)\Thrustmaster\TARGET\x64\TARGETGUI.exe" -r E:\StarCitizen-WarthogScript\script\StarCitizen_3.5.x_combined.tmc```<br>
@@ -30,10 +30,10 @@ When you as a pilot enter your pilot seat you should take a brief pre-flight che
  1. Turn on the `POWER` switch. - Wait for the ship AI confirmation message
  1. Then turn on `ENGINES`
 z
-### Known Bugs in 3.5.0o
+### Known Bugs in 3.5.0p
  * The Reverse Throttle function is working in the exact opposite way as it should. Means: you may have to pull the `Inverse Throttle` boat switch permanently into **ON** position to fly forward and have to release it into neutral position to fly backwards. <br>
  I hope CIG will fix this before release of 3.5.0.<br>
- It's possible to mitigate this issue by pressing **J** once on your keyboard before flying.
+ I tried to mitigate this issue by sending one **J** everytime the engines are switched on. However this isn't perfect since it is yet impossible to read the actual state from SC.
 
 ## TrackIR
 Looking around in your cockpit is great with TrackIR! But it's absolutely impossible to aim down a gun's sight in FPS mode. Sometimes it's also easier to handle kiosk menus without a moving head.
