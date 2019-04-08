@@ -1,11 +1,77 @@
+// ----------------------------------------------------------------------------------
+// Illumination macros
+// ----------------------------------------------------------------------------------
 
 define LEDsON                   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED0)
 define LEDsOFF                  LED(&Throttle, LED_ONOFF, LED_CURRENT - LED0)
 define LEDs43                   LED(&Throttle, LED_INTENSITY, 43)
 define LEDs86                   LED(&Throttle, LED_INTENSITY, 86)
+define LED1_ON                  LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1)
+define LED1_OFF                 LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1)
+define LED2_ON                  LED(&Throttle, LED_ONOFF, LED_CURRENT + LED2)
+define LED2_OFF                 LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2)
+define LED3_ON                  LED(&Throttle, LED_ONOFF, LED_CURRENT + LED3)
+define LED3_OFF                 LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3)
+define LED4_ON                  LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4)
+define LED4_OFF                 LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4)
+define LED5_ON                  LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5)
+define LED5_OFF                 LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5)
 
-// region Defines
+
+// ----------------------------------------------------------------------------------
+// StarCitizen keybinding macros
+// 
+// xxx         = 1 Pulsed Key Press / Single Action   (e.g. Fire Countermeasure)
+// xxx_Toggle  = 1 Pulsed Key Press / Toggled action  (e.g. Power on / off)
+// xxx_HOLD    = Key is held down
+// xxx_DN      = Key is held down and requires a release event
+// xxx_UP      = Release Event for held key
+// ----------------------------------------------------------------------------------
+
 define TrackIRPause_Toggle      PULSE + DEL
 define TrackIRRecenter_Toggle   PULSE + HOME
 define Power_Toggle             PULSE + 'u'
 define ReverseThrust_Toggle     PULSE + 'j'
+define Power_UP                 PULSE + F10
+define Power_MAX                CHAIN(Power_UP, D(60), Power_UP)
+define Coupled_Toggle           PULSE + 'v'
+define RollLeft_HOLD            'q'
+define RollRight_HOLD           'e'
+define SpaceBrake_HOLD          'x'
+define CountermeasureLaunch     PULSE + 'g'
+define CountermeasureSelect     PULSE + 'h'
+define Lights_Toggle            PULSE + 't'
+define LookBack_HOLD            'z'
+define Weapons_Toggle           PULSE + 'p'
+define Shields_Toggle           PULSE + 'o'
+define Engines_Toggle           PULSE + 'i'
+define LandingGear_DN           DOWN + 'n'
+define LandingGear_UP           UP + 'n'
+define MiningMode_Toggle        PULSE + 'm'
+define AITurrets_Toggle         PULSE + '/'
+define QuantumDrive_DN          DOWN + 'b'
+define QuantumDrive_UP          UP + 'b'
+define CruiseControl_Toggle     PULSE + 'c'
+define PowerBalanced            PULSE + F8
+define PowerToEngines_HOLD      F5
+define PowerToShields_HOLD      F6
+define PowerToWeapons_HOLD      F7
+
+define Modifier_DN              DOWN + L_ALT
+define Modifier_UP              UP + L_ALT
+define FireGroup1_HOLD          DX1
+define FireGroup2_HOLD          DX2
+define FireCombined             CHAIN(FireGroup1_HOLD, D(), FireGroup2_HOLD)
+define CyclePinned              PULSE + '4'
+define CycleFriendlies          PULSE + '5'
+define CycleSubtarget_HOLD      '2'
+define CycleEnemies             PULSE + '3'
+define ReticleFocus_HOLD        '1'
+define StrafeUp_DN              DOWN + SPC
+define StrafeUp_UP              UP + SPC
+define StrafeDown_DN            DOWN + L_CTL
+define StrafeDown_UP            UP + L_CTL
+define StrafeLeft_DN            DOWN + 'a'
+define StrafeLeft_UP            UP + 'a'
+define StrafeRight_DN           DOWN + 'd'
+define StrafeRight_UP           UP + 'd'

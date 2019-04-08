@@ -82,59 +82,85 @@ int throttle_maps()
 		printf("... add throttle mappings\x0a");
 
 	// keys
-	MapKey(&Throttle, SC, CHAIN(PULSE + F10, D(60), PULSE + F10));
-	MapKey(&Throttle, MSP, PULSE + 'v');
-	MapKey(&Throttle, MSU, 'q');
-	MapKey(&Throttle, MSD, 'e');
+	// Full Power
+	MapKey(&Throttle, SC, Power_MAX);
+
+	MapKey(&Throttle, MSP, Coupled_Toggle);
+
+	MapKey(&Throttle, MSU, RollLeft_HOLD);
+
+	MapKey(&Throttle, MSD, RollRight_HOLD);
+
 	MapKey(&Throttle, SPDF, EXEC("BlinkAfterburner();"));
 	MapKeyR(&Throttle, SPDF, EXEC("StopAutoRepeat(AfterburnerRIDX);"));
-	MapKey(&Throttle, SPDB, 'x');
+
+	MapKey(&Throttle, SPDB, SpaceBrake_HOLD);
+
 	MapKey(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("BlinkReverseThrust();")));
 	MapKeyR(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("StopAutoRepeat(ReverseThrustRIDX);")));
-	MapKey(&Throttle, CHF, PULSE + 'h');
-	MapKey(&Throttle, CHB, PULSE + 'g');
-	MapKey(&Throttle, PSF, PULSE + 't');
-	MapKeyR(&Throttle, PSF, PULSE + 't');
-	MapKey(&Throttle, LTB, 'z');
+
+	MapKey(&Throttle, CHF, CountermeasureSelect);
+
+	MapKey(&Throttle, CHB, CountermeasureLaunch);
+
+	MapKey(&Throttle, PSF, Lights_Toggle);
+	MapKeyR(&Throttle, PSF, Lights_Toggle);
+
+	MapKey(&Throttle, LTB, LookBack_HOLD);
+
 	MapKey(&Throttle, EFLNORM, CHAIN(Power_Toggle, D(), LEDsON, D(), LEDs86));
 	MapKeyR(&Throttle, EFLNORM, CHAIN(Power_Toggle, D(), LEDsON, D(), LEDs43));
+
 	MapKey(&Throttle, EFRNORM, CHAIN(TrackIRRecenter_Toggle, D(100), TrackIRPause_Toggle));
 	MapKeyR(&Throttle, EFRNORM, CHAIN(D(100), TrackIRPause_Toggle));
-	MapKey(&Throttle, EOLMOTOR, PULSE + 'p');
-	MapKey(&Throttle, EORMOTOR, PULSE + 'o');
-	// turn on engines and send one 'J' in order to deactivate the initially main thrusters inversion (Probably a bug in SC)
-	MapKey(&Throttle, APUON, CHAIN(PULSE + 'i', D(30), PULSE + 'j'));
 
-	MapKeyR(&Throttle, APUON, PULSE + 'i');
-	MapKey(&Throttle, LDGH, DOWN + 'n');
-	MapKeyR(&Throttle, LDGH, UP + 'n');
-	MapKeyIOUMD(&Throttle, FLAPD, 0, 0, 0, 0, PULSE + 'm', PULSE + 'm');
-	MapKeyRIOUMD(&Throttle, FLAPD, 0, 0, 0, 0, PULSE + 'm', PULSE + 'm');
-	MapKey(&Throttle, RDRNRM, PULSE + '/');
-	MapKeyR(&Throttle, RDRNRM, PULSE + '/');
-	MapKey(&Throttle, APENG, DOWN + 'b');
-	MapKeyR(&Throttle, APENG, UP + 'b');
-	MapKey(&Throttle, APPAT, PULSE + 'c');
-	MapKeyR(&Throttle, APPAT, PULSE + 'c');
-	MapKey(&Throttle, EOLIGN, PULSE + 'p');
-	MapKey(&Throttle, EORIGN, PULSE + 'o');
-	MapKey(&Throttle, IDLELON, CHAIN('x', D(), LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4)));
-	MapKeyR(&Throttle, IDLELON, LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4));
-	MapKey(&Throttle, CSU, PULSE + F8);
-	MapKey(&Throttle, CSD, F5);
-	MapKey(&Throttle, CSR, F6);
-	MapKey(&Throttle, CSL, F7);
+	MapKey(&Throttle, EOLMOTOR, Weapons_Toggle);
+	MapKey(&Throttle, EORMOTOR, Shields_Toggle);
+
+	// toggling on/off engines and send one 'J' in order to deactivate the initially main thrusters inversion (Probably a bug in SC)
+	MapKey(&Throttle, APUON, CHAIN(Engines_Toggle, D(30), ReverseThrust_Toggle));
+	MapKeyR(&Throttle, APUON, CHAIN(ReverseThrust_Toggle, D(30), Engines_Toggle));
+
+	MapKey(&Throttle, LDGH, LandingGear_DN);
+	MapKeyR(&Throttle, LDGH, LandingGear_UP);
+
+	MapKeyIOUMD(&Throttle, FLAPD, 0, 0, 0, 0, MiningMode_Toggle, MiningMode_Toggle);
+	MapKeyRIOUMD(&Throttle, FLAPD, 0, 0, 0, 0, MiningMode_Toggle, MiningMode_Toggle);
+
+	MapKey(&Throttle, RDRNRM, AITurrets_Toggle);
+	MapKeyR(&Throttle, RDRNRM, AITurrets_Toggle);
+
+	MapKey(&Throttle, APENG, QuantumDrive_DN);
+	MapKeyR(&Throttle, APENG, QuantumDrive_UP);
+
+	MapKey(&Throttle, APPAT, CruiseControl_Toggle);
+	MapKeyR(&Throttle, APPAT, CruiseControl_Toggle);
+
+	MapKey(&Throttle, EOLIGN, Weapons_Toggle);
+	MapKey(&Throttle, EORIGN, Shields_Toggle);
+
+	MapKey(&Throttle, IDLELON, CHAIN(SpaceBrake_HOLD, D(), LED4_ON));
+	MapKeyR(&Throttle, IDLELON, LED4_OFF);
+
+	MapKey(&Throttle, CSU, PowerBalanced);
+	MapKey(&Throttle, CSD, PowerToEngines_HOLD);
+	MapKey(&Throttle, CSR, PowerToShields_HOLD);
+	MapKey(&Throttle, CSL, PowerToWeapons_HOLD);
 
 	// axis
-	KeyAxis(&Throttle, SCY, '', AXMAP2(LIST(0, 40, 70), F10, 0, F9));
 	MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 	SetSCurve(&Throttle, SCX, 0, 30, 0, 2, 0);
+
+	KeyAxis(&Throttle, SCY, '', AXMAP2(LIST(0, 40, 70), F10, 0, F9));
 	MapAxis(&Throttle, SCY, DX_YROT_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
 	SetSCurve(&Throttle, SCY, 0, 40, 0, 2, 0);
+
 	MapAxis(&Throttle, THR_RIGHT, DX_Z_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
 	SetJCurve(&Throttle, THR_RIGHT, 70, 50);
+
 	MapAxis(&Throttle, THR_LEFT, DX_ZROT_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
 	SetJCurve(&Throttle, THR_LEFT, 70, 50);
+
 	MapAxis(&Throttle, THR_FC, DX_SLIDER_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 	SetJCurve(&Throttle, THR_FC, 50, 50);
 }
@@ -146,26 +172,30 @@ int joystick_maps()
 		printf("... add joystick mappings\x0a");
 
 	// keys
-	MapKey(&Joystick, S3, DOWN + L_ALT);
-	MapKeyR(&Joystick, S3, UP + L_ALT);
-	MapKey(&Joystick, TG2, CHAIN(DX1, D(), DX2));
-	MapKey(&Joystick, H4U, PULSE + '4');
-	MapKey(&Joystick, H4R, PULSE + '5');
-	MapKey(&Joystick, H4D, '2');
-	MapKey(&Joystick, H4L, PULSE + '3');
-	MapKey(&Joystick, H4P, '1');
-	MapKey(&Joystick, H1U, DOWN + SPC);
-	MapKeyR(&Joystick, H1U, UP + SPC);
-	MapKey(&Joystick, H1D, DOWN + L_CTL);
-	MapKeyR(&Joystick, H1D, UP + L_CTL);
-	MapKey(&Joystick, H1L, DOWN + 'a');
-	MapKeyR(&Joystick, H1L, UP + 'a');
-	MapKey(&Joystick, H1R, DOWN + 'd');
-	MapKeyR(&Joystick, H1R, UP + 'd');
+	MapKey(&Joystick, S3, Modifier_DN);
+	MapKeyR(&Joystick, S3, Modifier_UP);
+
+	MapKey(&Joystick, TG2, FireCombined);
+
+	MapKey(&Joystick, H4U, CyclePinned);
+	MapKey(&Joystick, H4R, CycleFriendlies);
+	MapKey(&Joystick, H4D, CycleSubtarget_HOLD);
+	MapKey(&Joystick, H4L, CycleEnemies);
+	MapKey(&Joystick, H4P, ReticleFocus_HOLD);
+
+	MapKey(&Joystick, H1U, StrafeUp_DN);
+	MapKeyR(&Joystick, H1U, StrafeUp_UP);
+	MapKey(&Joystick, H1D, StrafeDown_DN);
+	MapKeyR(&Joystick, H1D, StrafeDown_UP);
+	MapKey(&Joystick, H1L, StrafeLeft_DN);
+	MapKeyR(&Joystick, H1L, StrafeLeft_UP);
+	MapKey(&Joystick, H1R, StrafeRight_DN);
+	MapKeyR(&Joystick, H1R, StrafeRight_UP);
 
 	// axis
 	MapAxis(&Joystick, JOYX, DX_X_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 	SetSCurve(&Joystick, JOYX, 0, 0, 0, 2, 0);
+
 	MapAxis(&Joystick, JOYY, DX_Y_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 	SetSCurve(&Joystick, JOYY, 0, 0, 0, 2, 0);
 }
@@ -182,27 +212,11 @@ int startup_illumination()
 	ActKey(KEYON + LEDsON);
 
 	int count = 0;
-	ActKey(KEYON + CHAIN(
-					   D(),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED5),
-					   D(delay_ms * count),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5),
-					   D(),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED4),
-					   D(delay_ms * (count + 1)),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED4),
-					   D(),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED3),
-					   D(delay_ms * (count + 1)),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED3),
-					   D(),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED2),
-					   D(delay_ms * (count + 1)),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED2),
-					   D(),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT + LED1),
-					   D(delay_ms * (count + 1)),
-					   LED(&Throttle, LED_ONOFF, LED_CURRENT - LED1),
-					   LEDs43));
+	ActKey(KEYON + CHAIN(D(), LED5_ON, D(delay_ms * count), LED5_OFF,
+						 D(), LED4_ON, D(delay_ms * (count + 1)), LED4_OFF,
+						 D(), LED3_ON, D(delay_ms * (count + 1)), LED3_OFF,
+						 D(), LED2_ON, D(delay_ms * (count + 1)), LED2_OFF,
+						 D(), LED1_ON, D(delay_ms * (count + 1)), LED1_OFF,
+						 LEDs43));
 }
 // endregion
