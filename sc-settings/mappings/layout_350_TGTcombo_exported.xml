@@ -9,6 +9,7 @@
   <categories>
    <category label="@ui_CCSpaceFlight"/>
    <category label="@ui_CCVehicle"/>
+   <category label="@ui_CCFPS"/>
    <category label="@ui_CGInteraction"/>
   </categories>
  </CustomisationUIHeader>
@@ -27,6 +28,7 @@
   <turret_aim_yaw exponent="0.79999995"/>
  </options>
  <options type="joystick" instance="2" Product="Mad Catz Pro Flight Combat Rudder Pedals {076406A3-0000-0000-0000-504944564944}">
+  <flight_move_roll exponent="3"/>
   <turret_aim_pitch exponent="0.69999993"/>
   <turret_aim_yaw exponent="0.69999993"/>
  </options>
@@ -37,6 +39,9 @@
   </action>
   <action name="v_autoland">
    <rebind input="js1_ "/>
+  </action>
+  <action name="v_ifcs_toggle_esp">
+   <rebind input="kb1_0"/>
   </action>
   <action name="v_roll">
    <rebind input="js2_rotz"/>
@@ -159,6 +164,32 @@
   </action>
   <action name="v_yaw">
    <rebind input="js1_x"/>
+  </action>
+ </actionmap>
+ <actionmap name="player_emotes">
+  <action name="emote_wave">
+   <rebind input="kb1_7"/>
+  </action>
+  <action name="emote_point">
+   <rebind input="kb1_7" activationMode="double_tap"/>
+  </action>
+  <action name="emote_attention">
+   <rebind input="kb1_8"/>
+  </action>
+  <action name="emote_salute">
+   <rebind input="kb1_8" activationMode="double_tap"/>
+  </action>
+  <action name="emote_agree">
+   <rebind input="kb1_9"/>
+  </action>
+  <action name="emote_disagree">
+   <rebind input="kb1_9" activationMode="double_tap"/>
+  </action>
+  <action name="emote_bow">
+   <rebind input="kb1_0"/>
+  </action>
+  <action name="emote_launch">
+   <rebind input="kb1_0" activationMode="double_tap"/>
   </action>
  </actionmap>
  <actionmap name="player_choice">
