@@ -4,7 +4,7 @@ include "sc_bindings.ttm";
 int log_level = 1;
 int delay_ms = 100;
 
-alias version = "3.5.0p";
+alias version = "3.5.0t";
 
 int main()
 {
