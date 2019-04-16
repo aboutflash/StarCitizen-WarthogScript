@@ -1,5 +1,10 @@
 
 current master (WIP)
+Tested with SC 3.5.0.v
+- Added switch (EACON) to togle into camera mode and virtually hold the F4 key down
+- Corrected the throttle axis behaviour. Now there's no confusion of the thrust inversion anymore.
+- Added strafe forward/backward to MSR/MSL.
+- Removed default mouse zoom from mouse wheel in interactive mode and replaced it by MB4 + MB5 (mouse thumb buttons).
 
 v0.1.4
 Tested with SC 3.5.0t

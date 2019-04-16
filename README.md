@@ -29,11 +29,6 @@ When you as a pilot enter your pilot seat you should take a brief pre-flight che
  1. Flip all switches to their neutral/default state!
  1. Turn on the `POWER` switch. - Wait for the ship AI confirmation message
  1. Then turn on `ENGINES`
-z
-### Known Bugs in 3.5.0p
- * The Reverse Throttle function is working in the exact opposite way as it should. Means: you may have to pull the `Inverse Throttle` boat switch permanently into **ON** position to fly forward and have to release it into neutral position to fly backwards. <br>
- I hope CIG will fix this before release of 3.5.0.<br>
- I tried to mitigate this issue by sending one **J** everytime the engines are switched on. However this isn't perfect since it is yet impossible to read the actual state from SC.
 
 ## TrackIR
 Looking around in your cockpit is great with TrackIR! But it's absolutely impossible to aim down a gun's sight in FPS mode. Sometimes it's also easier to handle kiosk menus without a moving head.
@@ -41,7 +36,6 @@ To switch between look-around mode and FPS aim-down-sight mode one switch on the
 In order to work with your TrackIR configuration you should bind the **PAUSE** function to => `[DEL]` and the **Re-Center** function to => `[HOME]`.
 
 ## Action Mapping / Layout
-
 Here's an overview of the currently mapped functions to the HOTAS buttons and axis.
 ![Functional Button/Axis Mapping](resources/warthog_layout.png "Warthog HOTAS function mapping")
 

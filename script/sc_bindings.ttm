@@ -28,8 +28,10 @@ define LED5_OFF                 LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5)
 // xxx_UP      = Release Event for held key
 // ----------------------------------------------------------------------------------
 
-define TrackIRPause_Toggle      PULSE + DEL
-define TrackIRRecenter_Toggle   PULSE + HOME
+// on throttle
+
+define TrackIRPause_Toggle      PULSE + INS
+define TrackIRRecenter_Toggle   PULSE + DEL
 define Power_Toggle             PULSE + 'u'
 define ReverseThrust_Toggle     PULSE + 'j'
 define Power_UP                 PULSE + F10
@@ -57,6 +59,10 @@ define PowerToEngines_HOLD      F5
 define PowerToShields_HOLD      F6
 define PowerToWeapons_HOLD      F7
 define Afterburner_HOLD         L_SHIFT
+define StrafeForward_HOLD       's'     // s + w are swapped because of the initially inverted strafe axis
+define StrafeBackward_HOLD      'w'
+
+// on joystick
 
 define Modifier_DN              DOWN + L_ALT
 define Modifier_UP              UP + L_ALT
@@ -76,3 +82,9 @@ define StrafeLeft_DN            DOWN + 'a'
 define StrafeLeft_UP            UP + 'a'
 define StrafeRight_DN           DOWN + 'd'
 define StrafeRight_UP           UP + 'd'
+define Camera_Toggle            PULSE + F4
+define Freelook_Toggle          PULSE + 'z'
+define CameraControl_DN         DOWN + F4
+define CameraControl_UP         UP + F4
+define CameraMode_ON            CHAIN(Camera_Toggle, D(60), Freelook_Toggle, D(60), CameraControl_DN)
+define CameraMode_OFF           CHAIN(CameraControl_UP, D(60), Freelook_Toggle, D(60), Camera_Toggle)

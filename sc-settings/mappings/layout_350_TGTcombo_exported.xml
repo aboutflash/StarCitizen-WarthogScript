@@ -8,8 +8,9 @@
   </devices>
   <categories>
    <category label="@ui_CCSpaceFlight"/>
-   <category label="@ui_CCVehicle"/>
    <category label="@ui_CCFPS"/>
+   <category label="@ui_CCVehicle"/>
+   <category label="@ui_CGEASpectator"/>
    <category label="@ui_CGInteraction"/>
   </categories>
  </CustomisationUIHeader>
@@ -24,8 +25,7 @@
  </deviceoptions>
  <options type="keyboard" instance="1" Product="Keyboard {6F1D2B61-D5A0-11CF-BFC7-444553540000}"/>
  <options type="joystick" instance="1" Product="Thrustmaster Virtual Game Controller (root) {FFFF044F-0000-0000-0000-504944564944}">
-  <turret_aim_pitch exponent="0.79999995"/>
-  <turret_aim_yaw exponent="0.79999995"/>
+  <flight_move_roll exponent="3"/>
  </options>
  <options type="joystick" instance="2" Product="Mad Catz Pro Flight Combat Rudder Pedals {076406A3-0000-0000-0000-504944564944}">
   <flight_move_roll exponent="3"/>
@@ -50,7 +50,7 @@
    <rebind input="js1_rotz"/>
   </action>
   <action name="v_strafe_back">
-   <rebind input="js1_z"/>
+   <rebind input="js1_ "/>
   </action>
   <action name="v_strafe_down">
    <rebind input="js1_ "/>
@@ -141,6 +141,14 @@
    <rebind input="js1_ "/>
   </action>
  </actionmap>
+ <actionmap name="player">
+  <action name="zoom_in">
+   <rebind input="kb1_ "/>
+  </action>
+  <action name="zoom_out">
+   <rebind input="kb1_ "/>
+  </action>
+ </actionmap>
  <actionmap name="vehicle_general">
   <action name="v_flightready">
    <rebind input="js1_button9"/>
@@ -154,6 +162,12 @@
   <action name="v_view_yaw">
    <rebind input="js1_ "/>
   </action>
+  <action name="v_view_zoom_in">
+   <rebind input="mo1_mouse5"/>
+  </action>
+  <action name="v_view_zoom_out">
+   <rebind input="mo1_mouse4"/>
+  </action>
  </actionmap>
  <actionmap name="vehicle_driver">
   <action name="v_brake">
@@ -166,30 +180,38 @@
    <rebind input="js1_x"/>
   </action>
  </actionmap>
- <actionmap name="player_emotes">
-  <action name="emote_wave">
-   <rebind input="kb1_7"/>
+ <actionmap name="spectator">
+  <action name="spectate_zoom_in">
+   <rebind input="mo1_mouse5"/>
   </action>
-  <action name="emote_point">
-   <rebind input="kb1_7" activationMode="double_tap"/>
+  <action name="spectate_zoom_out">
+   <rebind input="mo1_mouse4"/>
+  </action>
+ </actionmap>
+ <actionmap name="player_emotes">
+  <action name="emote_agree">
+   <rebind input="kb1_9"/>
   </action>
   <action name="emote_attention">
    <rebind input="kb1_8"/>
   </action>
-  <action name="emote_salute">
-   <rebind input="kb1_8" activationMode="double_tap"/>
-  </action>
-  <action name="emote_agree">
-   <rebind input="kb1_9"/>
+  <action name="emote_bow">
+   <rebind input="kb1_0"/>
   </action>
   <action name="emote_disagree">
    <rebind input="kb1_9" activationMode="double_tap"/>
   </action>
-  <action name="emote_bow">
-   <rebind input="kb1_0"/>
-  </action>
   <action name="emote_launch">
    <rebind input="kb1_0" activationMode="double_tap"/>
+  </action>
+  <action name="emote_point">
+   <rebind input="kb1_7" activationMode="double_tap"/>
+  </action>
+  <action name="emote_salute">
+   <rebind input="kb1_8" activationMode="double_tap"/>
+  </action>
+  <action name="emote_wave">
+   <rebind input="kb1_7"/>
   </action>
  </actionmap>
  <actionmap name="player_choice">

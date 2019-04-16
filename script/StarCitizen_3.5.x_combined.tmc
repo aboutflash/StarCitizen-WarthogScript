@@ -4,7 +4,10 @@ include "sc_bindings.ttm";
 int log_level = 1;
 int delay_ms = 100;
 
-alias version = "3.5.0t";
+char isReverseThrust;
+char isCameraOn;
+
+alias version = "3.5.0";
 
 int main()
 {
@@ -28,6 +31,8 @@ int main()
 	SetKBRate(30, 33);
 	SetKBLayout(KB_ENG);
 	SetShiftButton(&Joystick, S4, &Throttle, FLAPU, FLAPD, 0);
+	isReverseThrust = 0;
+	isCameraOn = 0;
 
 	mapping();
 	startup_illumination();
@@ -86,18 +91,21 @@ int throttle_maps()
 	MapKey(&Throttle, SC, Power_MAX);
 
 	MapKey(&Throttle, MSP, Coupled_Toggle);
-
 	MapKey(&Throttle, MSU, RollLeft_HOLD);
-
 	MapKey(&Throttle, MSD, RollRight_HOLD);
+	// sends always the right keystrokes to move the ship forward/backward even if the thrust is currently inverted
+	MapKey(&Throttle, MSR, EXEC("if (isReverseThrust) ActKey(KEYON + StrafeForward_HOLD); else ActKey(KEYON + StrafeBackward_HOLD);"));
+	MapKeyR(&Throttle, MSR, EXEC("if (isReverseThrust) ActKey(StrafeForward_HOLD); else ActKey(StrafeBackward_HOLD);"));
+	MapKey(&Throttle, MSL, EXEC("if (isReverseThrust) ActKey(KEYON + StrafeBackward_HOLD); else ActKey(KEYON + StrafeForward_HOLD);"));
+	MapKeyR(&Throttle, MSL, EXEC("if (isReverseThrust) ActKey(StrafeBackward_HOLD); else ActKey(StrafeForward_HOLD);"));
 
 	MapKey(&Throttle, SPDF, CHAIN(Afterburner_HOLD, D(), EXEC("BlinkAfterburner();")));
 	MapKeyR(&Throttle, SPDF, EXEC("StopAutoRepeat(AfterburnerRIDX);"));
 
 	MapKey(&Throttle, SPDB, SpaceBrake_HOLD);
 
-	MapKey(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("BlinkReverseThrust();")));
-	MapKeyR(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("StopAutoRepeat(ReverseThrustRIDX);")));
+	MapKey(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("BlinkReverseThrust(); isReverseThrust=1;")));
+	MapKeyR(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("StopAutoRepeat(ReverseThrustRIDX); isReverseThrust=0;")));
 
 	MapKey(&Throttle, CHF, CountermeasureSelect);
 
@@ -118,8 +126,8 @@ int throttle_maps()
 	MapKey(&Throttle, EORMOTOR, Shields_Toggle);
 
 	// toggling on/off engines and send one 'J' in order to deactivate the initially main thrusters inversion (Probably a bug in SC)
-	MapKey(&Throttle, APUON, CHAIN(Engines_Toggle, D(30), ReverseThrust_Toggle));
-	MapKeyR(&Throttle, APUON, CHAIN(ReverseThrust_Toggle, D(30), Engines_Toggle));
+	MapKey(&Throttle, APUON, Engines_Toggle);
+	MapKeyR(&Throttle, APUON, Engines_Toggle);
 
 	MapKey(&Throttle, LDGH, LandingGear_DN);
 	MapKeyR(&Throttle, LDGH, LandingGear_UP);
@@ -146,6 +154,9 @@ int throttle_maps()
 	MapKey(&Throttle, CSD, PowerToEngines_HOLD);
 	MapKey(&Throttle, CSR, PowerToShields_HOLD);
 	MapKey(&Throttle, CSL, PowerToWeapons_HOLD);
+
+	MapKey(&Throttle, EACON, CHAIN(CameraMode_ON, D(), EXEC("isCameraOn=1;")));
+	MapKeyR(&Throttle, EACON, CHAIN(CameraMode_OFF, D(), EXEC("isCameraOn=0;")));
 
 	// axis
 	MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
