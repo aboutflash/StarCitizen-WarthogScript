@@ -14,12 +14,15 @@ The goal is to use as much of the SC default keybindings to minimize the control
  Where the latter path is obviously the location where you've copied the scripts to.
  * Check out or download the keybindings file under ```./sc-settings/mappings```
  * Import the keybindings in-game:
-    * Keyboard -> Keyboard
-    * Mouse -> Mouse
-    * Joystick (1) -> Joystick (1) // virtual Warthog HOTAS
-    * Joystick (2) -> Joystick (2) // optional Rudder Pedals - if you have some
+    * ```Keyboard -> Keyboard```
+    * ```Mouse -> Mouse```
+    * ```JoyStick -> JoyStick``` // virtual Warthog HOTAS<br>
+    ... and optional ...
+    * ```JoyStick -> JoyStick (1)``` // optional Rudder Pedals - if you have some<br>
+    **IGNORE assignment of the second Joystick if you don't have rudder pedals!**<br>
+    **In that case select ```JoyStick -> None``` from drop down.**
 
- * Apply a few [manual settings](sc-settings/ManualSettings.md) in-game.
+![Import key bindings](resources/import_keybindings.png)
 
 ## Usage advice
 Since StarCitizen is not yet able to provide status via an API T.A.R.G.E.T. is not able to detect in which state your ship is. This is especially difficult since StarCitizen keybindings still rely on toggle behaviour. This is cool for Mouse/Keyboard players but brings problems with input devices with flip-switches.
