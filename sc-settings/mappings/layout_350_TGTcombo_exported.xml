@@ -8,9 +8,9 @@
   </devices>
   <categories>
    <category label="@ui_CCSpaceFlight"/>
-   <category label="@ui_CCFPS"/>
    <category label="@ui_CCVehicle"/>
    <category label="@ui_CGEASpectator"/>
+   <category label="@ui_CCFPS"/>
    <category label="@ui_CGInteraction"/>
   </categories>
  </CustomisationUIHeader>
@@ -33,6 +33,31 @@
   <turret_aim_yaw exponent="0.69999993"/>
  </options>
  <modifiers />
+ <actionmap name="spaceship_general">
+  <action name="v_doors_close_all">
+   <rebind input="kb1_semicolon"/>
+  </action>
+  <action name="v_doors_lock_all">
+   <rebind input="kb1_l"/>
+  </action>
+  <action name="v_doors_open_all">
+   <rebind input="kb1_lalt+semicolon"/>
+  </action>
+  <action name="v_doors_unlock_all">
+   <rebind input="kb1_lalt+l"/>
+  </action>
+ </actionmap>
+ <actionmap name="spaceship_view">
+  <action name="v_view_dynamic_focus">
+   <rebind input="mo1_ "/>
+  </action>
+  <action name="v_view_zoom_in">
+   <rebind input="mo1_mwheel_up"/>
+  </action>
+  <action name="v_view_zoom_out">
+   <rebind input="mo1_mwheel_down"/>
+  </action>
+ </actionmap>
  <actionmap name="spaceship_movement">
   <action name="v_afterburner">
    <rebind input="js1_ "/>
@@ -69,6 +94,9 @@
   </action>
   <action name="v_strafe_up">
    <rebind input="js1_ "/>
+  </action>
+  <action name="v_target_match_vel">
+   <rebind input="kb1_k"/>
   </action>
   <action name="v_toggle_landing_system">
    <rebind input="js1_ "/>
@@ -141,14 +169,6 @@
    <rebind input="js1_ "/>
   </action>
  </actionmap>
- <actionmap name="player">
-  <action name="zoom_in">
-   <rebind input="kb1_ "/>
-  </action>
-  <action name="zoom_out">
-   <rebind input="kb1_ "/>
-  </action>
- </actionmap>
  <actionmap name="vehicle_general">
   <action name="v_flightready">
    <rebind input="js1_button9"/>
@@ -163,10 +183,10 @@
    <rebind input="js1_ "/>
   </action>
   <action name="v_view_zoom_in">
-   <rebind input="mo1_mouse5"/>
+   <rebind input="kb1_mouse5"/>
   </action>
   <action name="v_view_zoom_out">
-   <rebind input="mo1_mouse4"/>
+   <rebind input="kb1_mouse4"/>
   </action>
  </actionmap>
  <actionmap name="vehicle_driver">
@@ -182,10 +202,10 @@
  </actionmap>
  <actionmap name="spectator">
   <action name="spectate_zoom_in">
-   <rebind input="mo1_mouse5"/>
+   <rebind input="kb1_mouse5"/>
   </action>
   <action name="spectate_zoom_out">
-   <rebind input="mo1_mouse4"/>
+   <rebind input="kb1_mouse4"/>
   </action>
  </actionmap>
  <actionmap name="player_emotes">
@@ -199,16 +219,19 @@
    <rebind input="kb1_0"/>
   </action>
   <action name="emote_disagree">
-   <rebind input="kb1_9" activationMode="double_tap"/>
+   <rebind input="kb1_lalt+9" activationMode="hold"/>
   </action>
   <action name="emote_launch">
-   <rebind input="kb1_0" activationMode="double_tap"/>
+   <rebind input="kb1_ " activationMode="hold"/>
   </action>
   <action name="emote_point">
-   <rebind input="kb1_7" activationMode="double_tap"/>
+   <rebind input="kb1_lalt+7" activationMode="hold"/>
   </action>
   <action name="emote_salute">
-   <rebind input="kb1_8" activationMode="double_tap"/>
+   <rebind input="kb1_lalt+8" activationMode="hold"/>
+  </action>
+  <action name="emote_sit">
+   <rebind input="kb1_lalt+0"/>
   </action>
   <action name="emote_wave">
    <rebind input="kb1_7"/>
