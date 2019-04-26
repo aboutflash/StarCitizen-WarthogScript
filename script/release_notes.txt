@@ -1,6 +1,9 @@
 
 current master (WIP)
+
+v0.1.6
 - Removed permanent F4 keypress from camera switch. It happened to me that I killed the game by accidently hitting the "Alt" key which added up to Alt+F4. ... m(
+- adde keybindings to lock/unlock the ship, open/close exterior and changed some emotes.
 
 v0.1.5
 Tested with SC 3.5.0.v
