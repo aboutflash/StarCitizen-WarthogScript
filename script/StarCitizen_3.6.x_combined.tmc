@@ -7,7 +7,7 @@ int delay_ms = 100;
 char isReverseThrust;
 char isCameraOn;
 
-alias version = "3.5.0";
+alias version = "3.6.0";
 
 int main()
 {
@@ -28,7 +28,7 @@ int main()
 	if (Init(&EventHandle))
 		return 1;
 
-	SetKBRate(30, 33);
+	SetKBRate(50, 33);
 	SetKBLayout(KB_ENG);
 	SetShiftButton(&Joystick, S4, &Throttle, FLAPU, FLAPD, 0);
 	isReverseThrust = 0;
@@ -119,9 +119,6 @@ int throttle_maps()
 	MapKey(&Throttle, EFLNORM, CHAIN(Power_Toggle, D(), LEDsON, D(), LEDs86));
 	MapKeyR(&Throttle, EFLNORM, CHAIN(Power_Toggle, D(), LEDsON, D(), LEDs43));
 
-	MapKey(&Throttle, EFRNORM, CHAIN(TrackIRRecenter_Toggle, D(100), TrackIRPause_Toggle));
-	MapKeyR(&Throttle, EFRNORM, CHAIN(D(100), TrackIRPause_Toggle));
-
 	MapKey(&Throttle, EOLMOTOR, Weapons_Toggle);
 	MapKey(&Throttle, EORMOTOR, Shields_Toggle);
 
@@ -147,8 +144,8 @@ int throttle_maps()
 	MapKey(&Throttle, EOLIGN, Weapons_Toggle);
 	MapKey(&Throttle, EORIGN, Shields_Toggle);
 
-	MapKey(&Throttle, IDLELON, CHAIN(SpaceBrake_HOLD, D(), LED4_ON));
-	MapKeyR(&Throttle, IDLELON, LED4_OFF);
+	MapKey(&Throttle, IDLERON, CHAIN(SpaceBrake_HOLD, D(), LED4_ON));
+	MapKeyR(&Throttle, IDLERON, LED4_OFF);
 
 	MapKey(&Throttle, CSU, PowerBalanced);
 	MapKey(&Throttle, CSD, PowerToEngines_HOLD);
@@ -167,12 +164,12 @@ int throttle_maps()
 	SetSCurve(&Throttle, SCY, 0, 40, 0, 2, 0);
 
 	MapAxis(&Throttle, THR_RIGHT, DX_Z_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
-	SetJCurve(&Throttle, THR_RIGHT, 70, 50);
+	SetJCurve(&Throttle, THR_RIGHT, 50, 50);
 
 	MapAxis(&Throttle, THR_LEFT, DX_ZROT_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
-	SetJCurve(&Throttle, THR_LEFT, 70, 50);
+	SetJCurve(&Throttle, THR_LEFT, 50, 50);
 
-	MapAxis(&Throttle, THR_FC, DX_SLIDER_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
+	MapAxis(&Throttle, THR_FC, DX_SLIDER_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
 	SetJCurve(&Throttle, THR_FC, 50, 50);
 }
 

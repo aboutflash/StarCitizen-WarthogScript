@@ -1,4 +1,4 @@
-# TM Warthog config script for StarCitizen v3.5.0
+# TM Warthog config script for StarCitizen v3.6.0
 
 A simple Warthog HOTAS setup to match the current SC control schema.
 The goal is to use as much of the SC default keybindings to minimize the controllers setup ordeal between releases.
@@ -7,10 +7,10 @@ The goal is to use as much of the SC default keybindings to minimize the control
  * You need to have the Thrustmaster T.A.R.G.E.T. software version v3.0.18.328 installed
 
 ## How to run
- * Download latest [release .zip](https://github.com/aboutflash/StarCitizen-WarthogScript/releases/tag/0.1.3) and unzip the contents of it. <br>Alternatively check out or download the files under ```./script```. All of it.<br>
+ * Download latest [release .zip](https://github.com/aboutflash/StarCitizen-WarthogScript/releases/tag/0.2.0) and unzip the contents of it. <br>Alternatively check out or download the files under ```./script```. All of it.<br>
  See what's new in the [Release notes](script/release_notes.txt).
  * Point your T.A.R.G.E.T. software to run the script directly w/o loading the GUI.<br>
- ```"C:\Program Files (x86)\Thrustmaster\TARGET\x64\TARGETGUI.exe" -r E:\StarCitizen-WarthogScript\script\StarCitizen_3.5.x_combined.tmc```<br>
+ ```"C:\Program Files (x86)\Thrustmaster\TARGET\x64\TARGETGUI.exe" -r E:\StarCitizen-WarthogScript\script\StarCitizen_3.6.x_combined.tmc```<br>
  Where the latter path is obviously the location where you've copied the scripts to.
  * Check out or download the keybindings file under ```./sc-settings/mappings```
  * Import the keybindings in-game:
@@ -32,11 +32,6 @@ When you as a pilot enter your pilot seat you should take a brief pre-flight che
  1. Flip all switches to their neutral/default state!
  1. Turn on the `POWER` switch. - Wait for the ship AI confirmation message
  1. Then turn on `ENGINES`
-
-## TrackIR
-Looking around in your cockpit is great with TrackIR! But it's absolutely impossible to aim down a gun's sight in FPS mode. Sometimes it's also easier to handle kiosk menus without a moving head.
-To switch between look-around mode and FPS aim-down-sight mode one switch on the HOTAS is dedicated to flip between those two modes.
-In order to work with your TrackIR configuration you should bind the **PAUSE** function to => `[DEL]` and the **Re-Center** function to => `[HOME]`.
 
 ## Action Mapping / Layout
 Here's an overview of the currently mapped functions to the HOTAS buttons and axis.

@@ -1,5 +1,19 @@
 
 current master (WIP)
+v0.2.0
+Tested with SC 3.6.0
+- Added support for Star Citizen 3.6.x
+- Rebound former speed limiter Z-Axis-Rotation to Acceleration Limiter
+- Bound speed limiter to slider 2
+- Bound acceleration limiter to left throttle. I bound it intentionally in inversed order
+  so that it is possible to adjust vertical thrust in hover mode similar to a helicopter (pulling up increases thrust).
+- Bound space brake to right throttle IDLE position
+- Removed TrackIR mode on/of switch from FLOW_R since it is not necessary anymore with native TrackIR support in SC.
+Caveats:
+- Yet untested mining mode
+- Freelook is no toggle anymore
+TODOs:
+- update layout schematics
 
 v0.1.6
 - Removed permanent F4 keypress from camera switch. It happened to me that I killed the game by accidently hitting the "Alt" key which added up to Alt+F4. ... m(
@@ -7,7 +21,7 @@ v0.1.6
 
 v0.1.5
 Tested with SC 3.5.0.v
-- Added switch (EACON) to togle into camera mode and virtually hold the F4 key down
+- Added switch (EACON) to toggle into camera mode and virtually hold the F4 key down
 - Corrected the throttle axis behaviour. Now there's no confusion of the thrust inversion anymore.
 - Added strafe forward/backward to MSR/MSL.
 - Removed default mouse zoom from mouse wheel in interactive mode and replaced it by MB4 + MB5 (mouse thumb buttons).

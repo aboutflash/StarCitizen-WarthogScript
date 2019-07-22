@@ -61,6 +61,8 @@ define PowerToWeapons_HOLD      F7
 define Afterburner_HOLD         L_SHIFT
 define StrafeForward_HOLD       's'     // s + w are swapped because of the initially inverted strafe axis
 define StrafeBackward_HOLD      'w'
+define Freelook_Toggle          PULSE + 'z'
+define TransmitComms_HOLD       
 
 // on joystick
 
@@ -83,7 +85,6 @@ define StrafeLeft_UP            UP + 'a'
 define StrafeRight_DN           DOWN + 'd'
 define StrafeRight_UP           UP + 'd'
 define Camera_Toggle            PULSE + F4
-define Freelook_Toggle          PULSE + 'z'
 define CameraControl_DN         DOWN + F4
 define CameraControl_UP         UP + F4
 define CameraMode_ON            CHAIN(Camera_Toggle, D(60), Freelook_Toggle)
