@@ -5,7 +5,7 @@ int log_level = 1;
 int delay_ms = 100;
 
 char isReverseThrust;
-char isCameraOn;
+char isCommsOn;
 
 alias version = "3.6.0";
 
@@ -32,7 +32,7 @@ int main()
 	SetKBLayout(KB_ENG);
 	SetShiftButton(&Joystick, S4, &Throttle, FLAPU, FLAPD, 0);
 	isReverseThrust = 0;
-	isCameraOn = 0;
+	isCommsOn = 0;
 
 	mapping();
 	startup_illumination();
@@ -152,8 +152,8 @@ int throttle_maps()
 	MapKey(&Throttle, CSR, PowerToShields_HOLD);
 	MapKey(&Throttle, CSL, PowerToWeapons_HOLD);
 
-	MapKey(&Throttle, EACON, CHAIN(CameraMode_ON, D(), EXEC("isCameraOn=1;")));
-	MapKeyR(&Throttle, EACON, CHAIN(CameraMode_OFF, D(), EXEC("isCameraOn=0;")));
+	MapKey(&Throttle, EFRNORM, CHAIN(TransmitComms_ON, D(), EXEC("isCommsOn=1;")));
+	MapKeyR(&Throttle, EFRNORM, CHAIN(TransmitComms_OFF, D(), EXEC("isCommsOn=0;")));
 
 	// axis
 	MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);

@@ -62,7 +62,8 @@ define Afterburner_HOLD         L_SHIFT
 define StrafeForward_HOLD       's'     // s + w are swapped because of the initially inverted strafe axis
 define StrafeBackward_HOLD      'w'
 define Freelook_Toggle          PULSE + 'z'
-define TransmitComms_HOLD       
+define TransmitComms_ON         DOWN + USB[87]
+define TransmitComms_OFF        UP + USB[87]
 
 // on joystick
 
