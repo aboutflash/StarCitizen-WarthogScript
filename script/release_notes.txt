@@ -5,9 +5,10 @@ Tested with SC 3.7.0
 - Added support for StarCitizen 3.7.x
 - Bound EFRNORM to hail the targeted ship
 - Bound EACON/EACOFF to VTOL switch
-- inverted the Acceleration limiter axis to be 0 and 100% at their natural positions.
-TODOs:
-- update layout schematics
+- Inverted the Acceleration limiter axis to be 0 and 100% at their natural positions.
+- Fixed the laser throttle direction in mining mode.
+- Added distinct key bindings to open/close lock/unlock exteriors. 
+- updated layout schematics
 
 v0.2.0
 Tested with SC 3.6.0
