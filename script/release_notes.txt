@@ -1,5 +1,14 @@
 
 current master (WIP)
+v0.2.1
+Tested with SC 3.7.0
+- Added support for StarCitizen 3.7.x
+- Bound EFRNORM to hail the targeted ship
+- Bound EACON/EACOFF to VTOL switch
+- inverted the Acceleration limiter axis to be 0 and 100% at their natural positions.
+TODOs:
+- update layout schematics
+
 v0.2.0
 Tested with SC 3.6.0
 - Added support for Star Citizen 3.6.x
@@ -12,8 +21,6 @@ Tested with SC 3.6.0
 Caveats:
 - Yet untested mining mode
 - Freelook is no toggle anymore
-TODOs:
-- update layout schematics
 
 v0.1.6
 - Removed permanent F4 keypress from camera switch. It happened to me that I killed the game by accidently hitting the "Alt" key which added up to Alt+F4. ... m(

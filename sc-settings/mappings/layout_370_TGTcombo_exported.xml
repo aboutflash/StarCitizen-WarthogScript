@@ -1,5 +1,5 @@
-<ActionMaps version="1" optionsVersion="2" rebindVersion="2" profileName="360_TGTcombo">
- <CustomisationUIHeader label="360_TGTcombo" description="" image="">
+<ActionMaps version="1" optionsVersion="2" rebindVersion="2" profileName="370_TGTcombo">
+ <CustomisationUIHeader label="370_TGTcombo" description="" image="">
   <devices>
    <keyboard instance="1"/>
    <mouse instance="1"/>
@@ -27,18 +27,19 @@
  <options type="keyboard" instance="1" Product="Keyboard {6F1D2B61-D5A0-11CF-BFC7-444553540000}"/>
  <options type="joystick" instance="1" Product="Thrustmaster Virtual Game Controller (root) {FFFF044F-0000-0000-0000-504944564944}">
   <flight_move_roll exponent="3"/>
-  <flight_move_accel_range invert="1"/>
-  <turret_aim_pitch exponent="1.1"/>
-  <turret_aim_yaw exponent="1.1"/>
- </options>
- <options type="joystick" instance="2" Product="Mad Catz Pro Flight Combat Rudder Pedals {076406A3-0000-0000-0000-504944564944}">
-  <flight_move_roll exponent="3"/>
   <turret_aim_pitch exponent="0.69999993"/>
   <turret_aim_yaw exponent="0.69999993"/>
  </options>
+ <options type="joystick" instance="2" Product="Mad Catz Pro Flight Combat Rudder Pedals {076406A3-0000-0000-0000-504944564944}">
+  <flight_move_roll exponent="3"/>
+  <flight_move_accel_range invert="1"/>
+  <turret_aim_pitch exponent="0.69999993"/>
+  <turret_aim_yaw exponent="0.69999993"/>
+ </options>
+ <modifiers />
  <actionmap name="spaceship_general">
   <action name="v_eject">
-   <rebind input="js1_ "/>
+   <rebind input="js1_ " activationMode="press"/>
   </action>
  </actionmap>
  <actionmap name="spaceship_view">
@@ -84,7 +85,7 @@
    <rebind input="js1_ "/>
   </action>
   <action name="v_strafe_longitudinal_invert">
-   <rebind input="kb1_j"/>
+   <rebind input="kb1_semicolon"/>
   </action>
   <action name="v_strafe_right">
    <rebind input="js1_ "/>

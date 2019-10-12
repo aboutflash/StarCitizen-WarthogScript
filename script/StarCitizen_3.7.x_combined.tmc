@@ -7,7 +7,7 @@ int delay_ms = 100;
 char isReverseThrust;
 char isCommsOn;
 
-alias version = "3.6.0";
+alias version = "3.7.0";
 
 int main()
 {
@@ -119,6 +119,8 @@ int throttle_maps()
 	MapKey(&Throttle, EFLNORM, CHAIN(Power_Toggle, D(), LEDsON, D(), LEDs86));
 	MapKeyR(&Throttle, EFLNORM, CHAIN(Power_Toggle, D(), LEDsON, D(), LEDs43));
 
+	MapKey(&Throttle, EFRNORM, HailTarget);
+
 	MapKey(&Throttle, EOLMOTOR, Weapons_Toggle);
 	MapKey(&Throttle, EORMOTOR, Shields_Toggle);
 
@@ -152,8 +154,8 @@ int throttle_maps()
 	MapKey(&Throttle, CSR, PowerToShields_HOLD);
 	MapKey(&Throttle, CSL, PowerToWeapons_HOLD);
 
-	MapKey(&Throttle, EFRNORM, CHAIN(TransmitComms_ON, D(), EXEC("isCommsOn=1;")));
-	MapKeyR(&Throttle, EFRNORM, CHAIN(TransmitComms_OFF, D(), EXEC("isCommsOn=0;")));
+	MapKey(&Throttle, EACON, VTOL_Toggle);
+	MapKey(&Throttle, EACOFF, VTOL_Toggle);
 
 	// axis
 	MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);

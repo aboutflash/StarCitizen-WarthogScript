@@ -33,7 +33,7 @@ define LED5_OFF                 LED(&Throttle, LED_ONOFF, LED_CURRENT - LED5)
 define TrackIRPause_Toggle      PULSE + INS
 define TrackIRRecenter_Toggle   PULSE + DEL
 define Power_Toggle             PULSE + 'u'
-define ReverseThrust_Toggle     PULSE + 'j'
+define ReverseThrust_Toggle     PULSE + ';'
 define Power_UP                 PULSE + F10
 define Power_MAX                CHAIN(Power_UP, D(60), Power_UP)
 define Coupled_Toggle           PULSE + 'v'
@@ -64,6 +64,8 @@ define StrafeBackward_HOLD      'w'
 define Freelook_Toggle          PULSE + 'z'
 define TransmitComms_ON         DOWN + USB[87]
 define TransmitComms_OFF        UP + USB[87]
+define VTOL_Toggle              PULSE + 'j'
+define HailTarget               PULSE + '6'
 
 // on joystick
 
