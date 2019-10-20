@@ -3,9 +3,8 @@
   <devices>
    <keyboard instance="1"/>
    <mouse instance="1"/>
-   <joystick instance="3"/>
-   <joystick instance="2"/>
    <joystick instance="1"/>
+   <joystick instance="2"/>
   </devices>
   <categories>
    <category label="@ui_CCSpaceFlight"/>
@@ -25,9 +24,14 @@
   <option input="slider2" deadzone="0"/>
   <option input="z" deadzone="0"/>
  </deviceoptions>
- <options type="keyboard" instance="1" Product="Keyboard {6F1D2B61-D5A0-11CF-BFC7-444553540000}"/>
+ <options type="keyboard" instance="1" Product="Keyboard {6F1D2B61-D5A0-11CF-BFC7-444553540000}">
+  <turret_aim_pitch exponent="1.1"/>
+  <turret_aim_yaw exponent="1.1"/>
+ </options>
  <options type="joystick" instance="1" Product="Thrustmaster Virtual Game Controller (root) {FFFF044F-0000-0000-0000-504944564944}">
   <flight_move_roll exponent="3"/>
+  <turret_aim_pitch exponent="0.69999993"/>
+  <turret_aim_yaw exponent="0.69999993"/>
   <mining_throttle invert="0"/>
  </options>
  <options type="joystick" instance="2" Product="Mad Catz Pro Flight Combat Rudder Pedals {076406A3-0000-0000-0000-504944564944}">
@@ -36,7 +40,6 @@
   <turret_aim_pitch exponent="0.69999993"/>
   <turret_aim_yaw exponent="0.69999993"/>
  </options>
- <options type="joystick" instance="3" Product="Joystick - HOTAS Warthog {0402044F-0000-0000-0000-504944564944}"/>
  <modifiers />
  <actionmap name="spaceship_general">
   <action name="v_close_all_doors">

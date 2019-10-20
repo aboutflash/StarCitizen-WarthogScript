@@ -1,5 +1,9 @@
 
 current master (WIP)
+v0.2.2
+Tested with SC 3.7.1
+- fixed joystick assignment (now there's only 2 not 3)
+
 v0.2.1
 Tested with SC 3.7.0
 - Added support for StarCitizen 3.7.x
