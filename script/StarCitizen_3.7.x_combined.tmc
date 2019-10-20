@@ -124,7 +124,6 @@ int throttle_maps()
 	MapKey(&Throttle, EOLMOTOR, Weapons_Toggle);
 	MapKey(&Throttle, EORMOTOR, Shields_Toggle);
 
-	// toggling on/off engines and send one 'J' in order to deactivate the initially main thrusters inversion (Probably a bug in SC)
 	MapKey(&Throttle, APUON, Engines_Toggle);
 	MapKeyR(&Throttle, APUON, Engines_Toggle);
 
@@ -168,7 +167,7 @@ int throttle_maps()
 	MapAxis(&Throttle, THR_RIGHT, DX_Z_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
 	SetJCurve(&Throttle, THR_RIGHT, 50, 50);
 
-	MapAxis(&Throttle, THR_LEFT, DX_ZROT_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);
+	MapAxis(&Throttle, THR_LEFT, DX_ZROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
 	SetJCurve(&Throttle, THR_LEFT, 50, 50);
 
 	MapAxis(&Throttle, THR_FC, DX_SLIDER_AXIS, AXIS_REVERSED, MAP_ABSOLUTE);

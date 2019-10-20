@@ -1,5 +1,9 @@
 
 current master (WIP)
+v0.2.3
+Tested with SC 3.7.1
+- fixed joystick acceleration limiter axis from reversed to normal
+
 v0.2.2
 Tested with SC 3.7.1
 - fixed joystick assignment (now there's only 2 not 3)
