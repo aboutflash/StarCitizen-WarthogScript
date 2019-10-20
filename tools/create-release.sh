@@ -1,6 +1,6 @@
 #!/bin/bash
 
-screlease="3.7.0"
+screlease="3.7.1"
 
 version=$(git describe --abbrev=0 --tags)
 outfile=$PWD/warthog-script-v$version-sc$screlease.zip
