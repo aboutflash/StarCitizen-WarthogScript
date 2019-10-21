@@ -12,7 +12,7 @@ The goal is to use as much of the SC default keybindings to minimize the control
  * Point your T.A.R.G.E.T. software to run the script directly w/o loading the GUI.<br>
  ```"C:\Program Files (x86)\Thrustmaster\TARGET\x64\TARGETGUI.exe" -r E:\StarCitizen-WarthogScript\script\StarCitizen_3.7.x_combined.tmc```<br>
  Where the latter path is obviously the location where you've copied the scripts to.
- * Check out or download the keybindings file under ```./sc-settings/mappings```
+ * Copy the keybindings file from ```./sc-settings/mappings``` into your game directory ```/USER/controls/Mappings```. 
  * Import the keybindings in-game:
     * ```Keyboard -> Keyboard```
     * ```Mouse -> Mouse```
@@ -30,6 +30,7 @@ Since StarCitizen is not yet able to provide status via an API T.A.R.G.E.T. is n
 To tackle this problem we have to make some assumptions on the ship's state in order to have fun using the HOTAS. Basically this assumption is, that the ship you are entering is spawned without any systems on.
 When you as a pilot enter your pilot seat you should take a brief pre-flight check to bring your HOTAS in the right configuration. 
  1. Flip all switches to their neutral/default state!
+ 1. Enter your pilotes seat.
  1. Turn on the `POWER` switch. - Wait for the ship AI confirmation message
  1. Then turn on `ENGINES`
 
