@@ -7,7 +7,7 @@ int delay_ms = 100;
 char isReverseThrust;
 char isCommsOn;
 
-alias version = "3.7.0";
+alias version = "3.7.1";
 
 int main()
 {
@@ -30,7 +30,7 @@ int main()
 
 	SetKBRate(50, 33);
 	SetKBLayout(KB_ENG);
-	SetShiftButton(&Joystick, S4, &Throttle, FLAPU, FLAPD, 0);
+	SetShiftButton(0, 0, &Throttle, FLAPU, FLAPD, 0);
 	isReverseThrust = 0;
 	isCommsOn = 0;
 
@@ -200,6 +200,8 @@ int joystick_maps()
 	MapKeyR(&Joystick, H1L, StrafeLeft_UP);
 	MapKey(&Joystick, H1R, StrafeRight_DN);
 	MapKeyR(&Joystick, H1R, StrafeRight_UP);
+	MapKey(&Joystick, S4, VoiceAttack_Listen_DN);
+	MapKeyR(&Joystick, S4, VoiceAttack_Listen_UP);
 
 	// axis
 	MapAxis(&Joystick, JOYX, DX_X_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);

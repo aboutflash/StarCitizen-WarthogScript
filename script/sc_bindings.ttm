@@ -92,3 +92,5 @@ define CameraControl_DN         DOWN + F4
 define CameraControl_UP         UP + F4
 define CameraMode_ON            CHAIN(Camera_Toggle, D(60), Freelook_Toggle)
 define CameraMode_OFF           CHAIN(Freelook_Toggle, D(60), Camera_Toggle)
+define VoiceAttack_Listen_DN    DOWN + USB[99]
+define VoiceAttack_Listen_UP    UP + USB[99]
