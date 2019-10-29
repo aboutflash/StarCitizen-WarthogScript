@@ -10,7 +10,7 @@ The goal is to use as much of the SC default keybindings to minimize the control
  * Download latest [release .zip](https://github.com/aboutflash/StarCitizen-WarthogScript/releases/tag/0.2.3) and unzip the contents of it. <br>Alternatively check out or download the files under ```./script```. All of it.<br>
  See what's new in the [Release notes](script/release_notes.txt).
  * Point your T.A.R.G.E.T. software to run the script directly w/o loading the GUI.<br>
- ```"C:\Program Files (x86)\Thrustmaster\TARGET\x64\TARGETGUI.exe" -r E:\StarCitizen-WarthogScript\script\StarCitizen_3.7.x_combined.tmc```<br>
+ ```"C:\Program Files (x86)\Thrustmaster\TARGET\x64\TARGETGUI.exe" -r "E:\StarCitizen-WarthogScript\script\StarCitizen_3.7.x_combined.tmc"```<br>
  Where the latter path is obviously the location where you've copied the scripts to.
  * Copy the keybindings file from ```./sc-settings/mappings``` into your game directory ```/USER/controls/Mappings```. 
  * Import the keybindings in-game:
