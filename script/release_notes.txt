@@ -1,5 +1,10 @@
 
 current master (WIP)
+v0.2.4
+Tested with SC 3.8.0
+- Added support for 3.8.x
+- Removed a key binding for an emote which I had in my custom key bindings XML because it is shadowing melee mode toggle key "0" introduced with 3.8.0.
+
 v0.2.3
 Tested with SC 3.7.1
 - fixed joystick acceleration limiter axis from reversed to normal
