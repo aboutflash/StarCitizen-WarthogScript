@@ -1,5 +1,5 @@
-<ActionMaps version="1" optionsVersion="2" rebindVersion="2" profileName="370_TGTcombo">
- <CustomisationUIHeader label="370_TGTcombo" description="" image="">
+<ActionMaps version="1" optionsVersion="2" rebindVersion="2" profileName="380_TGTcombo">
+ <CustomisationUIHeader label="380_TGTcombo" description="" image="">
   <devices>
    <keyboard instance="1"/>
    <mouse instance="1"/>
@@ -220,9 +220,6 @@
   <action name="emote_attention">
    <rebind input="kb1_8"/>
   </action>
-  <action name="emote_bow">
-   <rebind input="kb1_0"/>
-  </action>
   <action name="emote_disagree">
    <rebind input="kb1_lalt+9" activationMode="hold"/>
   </action>
@@ -234,9 +231,6 @@
   </action>
   <action name="emote_salute">
    <rebind input="kb1_lalt+8" activationMode="hold"/>
-  </action>
-  <action name="emote_sit">
-   <rebind input="kb1_lalt+0"/>
   </action>
   <action name="emote_wave">
    <rebind input="kb1_7"/>
