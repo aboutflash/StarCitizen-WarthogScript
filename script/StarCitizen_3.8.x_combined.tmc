@@ -21,7 +21,7 @@ int main()
 	Configure(&T16000L, MODE_EXCLUDED);
 	Configure(&LMFD, MODE_EXCLUDED);
 	Configure(&RMFD, MODE_EXCLUDED);
-	Configure(&TFRPRudder, MODE_EXCLUDED);öööööö
+	Configure(&TFRPRudder, MODE_EXCLUDED);
 	Configure(&TWCSThrottle, MODE_EXCLUDED);
 	Configure(&TFRPHARudder, MODE_EXCLUDED);
 
