@@ -43,7 +43,9 @@ define SpaceBrake_HOLD          'x'
 define CountermeasureLaunch     PULSE + 'g'
 define CountermeasureSelect     PULSE + 'h'
 define Lights_Toggle            PULSE + 't'
-define LookBack_HOLD            'z'
+define LookBack_HOLD            USB[52]
+define LookBack_DN              DOWN + USB[52]
+define LookBack_UP              UP + USB[52]
 define Weapons_Toggle           PULSE + 'p'
 define Shields_Toggle           PULSE + 'o'
 define Engines_Toggle           PULSE + 'i'

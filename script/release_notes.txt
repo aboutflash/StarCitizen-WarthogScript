@@ -1,5 +1,12 @@
 
 current master (WIP)
+v0.2.5
+Tested with SC 3.9.0
+- Added support for 3.9.x
+- Removed thrust reverse switch and replaced it by "look back" functionality
+- Replaces roll movements from MSU/MSD by strafe up/down
+- EFR switch ON is holding keypad + in order to open SC ingame voice when in PTT mode
+
 v0.2.4
 Tested with SC 3.8.0
 - Added support for 3.8.x

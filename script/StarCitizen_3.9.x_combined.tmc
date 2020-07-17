@@ -7,7 +7,7 @@ int delay_ms = 100;
 char isReverseThrust;
 char isCommsOn;
 
-alias version = "3.8.0";
+alias version = "3.9.0";
 
 int main()
 {
@@ -90,22 +90,25 @@ int throttle_maps()
 	// Full Power
 	MapKey(&Throttle, SC, Power_MAX);
 
+	MapKey(&Throttle, MSL, StrafeForward_HOLD);
+	MapKeyR(&Throttle, MSL, StrafeForward_HOLD);
+	MapKey(&Throttle, MSR, StrafeBackward_HOLD);
+	MapKeyR(&Throttle, MSR, StrafeBackward_HOLD);
+
+	MapKey(&Throttle, MSU, StrafeUp_DN);
+	MapKeyR(&Throttle, MSU, StrafeUp_UP);
+	MapKey(&Throttle, MSD, StrafeDown_DN);
+	MapKeyR(&Throttle, MSD, StrafeDown_UP);
+	MapKey(&Throttle, RDRNRM, LookBack_DN);
+	MapKeyR(&Throttle, RDRNRM, LookBack_UP);
+	MapKey(&Throttle, BSF, Camera_Toggle);
+	MapKeyR(&Throttle, BSF, Camera_Toggle);
 	MapKey(&Throttle, MSP, Coupled_Toggle);
-	MapKey(&Throttle, MSU, RollLeft_HOLD);
-	MapKey(&Throttle, MSD, RollRight_HOLD);
-	// sends always the right keystrokes to move the ship forward/backward even if the thrust is currently inverted
-	MapKey(&Throttle, MSR, EXEC("if (isReverseThrust) ActKey(KEYON + StrafeForward_HOLD); else ActKey(KEYON + StrafeBackward_HOLD);"));
-	MapKeyR(&Throttle, MSR, EXEC("if (isReverseThrust) ActKey(StrafeForward_HOLD); else ActKey(StrafeBackward_HOLD);"));
-	MapKey(&Throttle, MSL, EXEC("if (isReverseThrust) ActKey(KEYON + StrafeBackward_HOLD); else ActKey(KEYON + StrafeForward_HOLD);"));
-	MapKeyR(&Throttle, MSL, EXEC("if (isReverseThrust) ActKey(StrafeBackward_HOLD); else ActKey(StrafeForward_HOLD);"));
 
 	MapKey(&Throttle, SPDF, CHAIN(Afterburner_HOLD, D(), EXEC("BlinkAfterburner();")));
 	MapKeyR(&Throttle, SPDF, EXEC("StopAutoRepeat(AfterburnerRIDX);"));
 
 	MapKey(&Throttle, SPDB, SpaceBrake_HOLD);
-
-	MapKey(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("BlinkReverseThrust(); isReverseThrust=1;")));
-	MapKeyR(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("StopAutoRepeat(ReverseThrustRIDX); isReverseThrust=0;")));
 
 	MapKey(&Throttle, CHF, CountermeasureSelect);
 
@@ -114,12 +117,11 @@ int throttle_maps()
 	MapKey(&Throttle, PSF, Lights_Toggle);
 	MapKeyR(&Throttle, PSF, Lights_Toggle);
 
-	MapKey(&Throttle, LTB, LookBack_HOLD);
-
 	MapKey(&Throttle, EFLNORM, CHAIN(Power_Toggle, D(), LEDsON, D(), LEDs86));
 	MapKeyR(&Throttle, EFLNORM, CHAIN(Power_Toggle, D(), LEDsON, D(), LEDs43));
 
-	MapKey(&Throttle, EFRNORM, HailTarget);
+	MapKey(&Throttle, EFRNORM, TransmitComms_ON);
+	MapKeyR(&Throttle, EFRNORM, TransmitComms_OFF);
 
 	MapKey(&Throttle, EOLMOTOR, Weapons_Toggle);
 	MapKey(&Throttle, EORMOTOR, Shields_Toggle);
@@ -133,8 +135,8 @@ int throttle_maps()
 	MapKeyIOUMD(&Throttle, FLAPD, 0, 0, 0, 0, MiningMode_Toggle, MiningMode_Toggle);
 	MapKeyRIOUMD(&Throttle, FLAPD, 0, 0, 0, 0, MiningMode_Toggle, MiningMode_Toggle);
 
-	MapKey(&Throttle, RDRNRM, AITurrets_Toggle);
-	MapKeyR(&Throttle, RDRNRM, AITurrets_Toggle);
+	// MapKey(&Throttle, RDRNRM, AITurrets_Toggle);
+	// MapKeyR(&Throttle, RDRNRM, AITurrets_Toggle);
 
 	MapKey(&Throttle, APENG, QuantumDrive_DN);
 	MapKeyR(&Throttle, APENG, QuantumDrive_UP);
@@ -155,6 +157,14 @@ int throttle_maps()
 
 	MapKey(&Throttle, EACON, VTOL_Toggle);
 	MapKey(&Throttle, EACOFF, VTOL_Toggle);
+
+	// sends always the right keystrokes to move the ship forward/backward even if the thrust is currently inverted
+	// MapKey(&Throttle, MSR, EXEC("if (isReverseThrust) ActKey(KEYON + StrafeForward_HOLD); else ActKey(KEYON + StrafeBackward_HOLD);"));
+	// MapKeyR(&Throttle, MSR, EXEC("if (isReverseThrust) ActKey(StrafeForward_HOLD); else ActKey(StrafeBackward_HOLD);"));
+	// MapKey(&Throttle, MSL, EXEC("if (isReverseThrust) ActKey(KEYON + StrafeBackward_HOLD); else ActKey(KEYON + StrafeForward_HOLD);"));
+	// MapKeyR(&Throttle, MSL, EXEC("if (isReverseThrust) ActKey(StrafeBackward_HOLD); else ActKey(StrafeForward_HOLD);"));
+	MapKey(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("BlinkReverseThrust(); isReverseThrust=1;")));
+	MapKeyR(&Throttle, BSB, CHAIN(ReverseThrust_Toggle, D(), EXEC("StopAutoRepeat(ReverseThrustRIDX); isReverseThrust=0;")));
 
 	// axis
 	MapAxis(&Throttle, SCX, DX_XROT_AXIS, AXIS_NORMAL, MAP_ABSOLUTE);
